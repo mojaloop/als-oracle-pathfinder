@@ -1,0 +1,9 @@
+{
+  "PORT": 3030,
+  "HOSTNAME": "http://als-oracle-template.local",
+  "DATABASE_URI" : "mysql://central_ledger:password@localhost:3306/als-oracle",
+  "HUB_PARTICIPANT": {
+    "ID": 1,
+    "NAME": "Hub"
+  }
+}

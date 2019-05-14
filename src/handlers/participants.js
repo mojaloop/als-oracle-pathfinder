@@ -2,7 +2,7 @@
 
 const Boom = require('@hapi/boom');
 const dataAccess = require('../models/participants');
-const Logger = require('@@mojaloop/central-services-shared').Logger;
+const Logger = require('@mojaloop/central-services-shared').Logger;
 
 /**
  * Operations on /participants
@@ -47,7 +47,7 @@ module.exports = {
             const response = await getData;
             return h.response(response).code(request.server.app.responseCode);
         } catch (e) {
-            Logger(e);
+            Logger.error(e);
         }
     }
 };

@@ -6,7 +6,7 @@ const Path = require('path');
 // const Db = require('./models')
 // const Enums = require('./models/lib/enums')
 const Config = require('../config/default.json');
-const Logger = require('@@mojaloop/central-services-shared').Logger;
+const Logger = require('@mojaloop/central-services-shared').Logger;
 
 const openAPIOptions = {
     api: Path.resolve(__dirname, './interface/swagger.json'),
@@ -82,7 +82,7 @@ const createServer = async function (config, openAPIPluginOptions) {
         await server.start();
         return server;
     } catch (e) {
-        Logger(e);
+        Logger.error(e);
     }
 };
 

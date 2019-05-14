@@ -1,4 +1,7 @@
 {
+    "parserOptions": {
+        "ecmaVersion": 9,
+    },
     "rules": {
         "indent": [
             2,

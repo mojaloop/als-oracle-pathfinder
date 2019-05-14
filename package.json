@@ -20,18 +20,14 @@
         "@mojaloop/forensic-logging-client": "5.2.0"
     },
     "devDependencies": {
+        "ava": "^1.4.1",
         "eslint": "5.6.1",
         "swagmock": "1.0.0"
     },
     "scripts": {
         "start": "node ./src/server",
-        "test": "tape 'test/**/*.js'",
-        "test:unit": "tape 'test/unit/**/*.js'",
-        "test:xunit": "tape 'test/unit/**/*.js' | tap-xunit",
-        "cover": "istanbul cover tape -- 'test/unit/**/*.js'",
+        "test": "ava",
         "lint": "eslint .",
-        "test:coverage-check": "npm run test:coverage && istanbul check-coverage",
-        "test:coverage": "istanbul cover tape -- 'test/unit/**/*.js'",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/interface/swagger.json'"
     },
     "generator-swaggerize": {

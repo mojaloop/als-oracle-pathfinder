@@ -22,8 +22,8 @@
  --------------
  ******/
 
-'use strict'
+'use strict';
 
-const Setup = require('./setup')
+const Setup = require('./setup');
 
-module.exports = Setup.initialize()
+module.exports = Setup.initialize();

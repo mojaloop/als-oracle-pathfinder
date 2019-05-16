@@ -1,4 +1,0 @@
-{
-  "PORT": 3000,
-  "DATABASE_URI" : "mysql://central_ledger:password@localhost:3306/als-oracle"
-}

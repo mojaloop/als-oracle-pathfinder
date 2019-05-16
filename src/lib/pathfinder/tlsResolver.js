@@ -103,6 +103,8 @@ module.exports = class TlsResolver {
         // });
         let socketOpts = {
             ...this.config.tls,
+            // TODO: expect an array always. This means flattening the read-in .ca before passing
+            // it here
             ca: Array.isArray(this.config.tls.ca) ? this.config.tls.ca : [this.config.tls.ca]
             // TODO: try these options
             //requestCert: true,

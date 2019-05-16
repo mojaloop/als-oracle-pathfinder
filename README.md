@@ -7,3 +7,6 @@ Mojaloop [ALS Oracle Template](https://github.com/mojaloop/als-oracle-template).
 * tidy up pathfinder lib config- it should allow a user to supply a pathfinder config and provide
     any missing defaults
 * pathfinder module should use this.logger.{error, warn, info, debug}
+* go through and address all TODOs in pathfinder lib
+* use dotenv? inside config.js?
+* make sure pathfinder tests are running

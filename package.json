@@ -31,7 +31,7 @@
         "start": "node ./src/server",
         "test": "ava",
         "lint": "eslint .",
-        "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/interface/swagger.json'"
+        "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'"
     },
     "generator-swaggerize": {
         "version": "4.1.0"

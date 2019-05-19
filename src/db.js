@@ -1,32 +1,37 @@
 
 'use strict';
 
-const knex = require('knex');
+const Knex = require('knex');
 
 const tableCreateStmt = `
-CREATE TABLE IF NOT EXISTS pathfinderOracleCache (
-    \`pathfinderOracleCacheId\` int(10) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Surrogate PK',
-    \`pathfinderOracleCachePartyType\` TEXT NOT NULL COMMENT 'E.g. MSISDN or MERCH_ID',
-    \`pathfinderOracleCachePartyId\` TEXT NOT NULL COMMENT 'E.g. 2234567890 (MSISDN)',
+CREATE TABLE IF NOT EXISTS participantMno (
+    \`participantMnoId\` int(10) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Surrogate PK',
+    \`mobileCountryCode\` SMALLINT unsigned NOT NULL COMMENT 'The three digit code representing the MCC returned by Pathfinder',
+    \`mobileNetworkCode\` SMALLINT unsigned NOT NULL COMMENT 'The three digit code representing the MNC returned by Pathfinder',
     \`participantId\` int(10) unsigned NOT NULL UNIQUE,
-    CONSTRAINT partyinfocache_participantid_foreign FOREIGN KEY (participantId)
+    CONSTRAINT participantmno_participantid_foreign FOREIGN KEY (participantId)
         REFERENCES participant (participantId),
-    CONSTRAINT partyinfocache_partyinfotypekeyidkey_unique_key
-        UNIQUE INDEX (pathfinderOracleCachePartyType, pathfinderOracleCachePartyId)
-)`;
+    CONSTRAINT participantmno_participantid_mcc_mnc_unique_key
+        UNIQUE INDEX (participantId, mobileCountryCode, mobileNetworkCode),
+    CONSTRAINT participantmno_mobilecountrycode_mobilenetworkcode_unique
+        UNIQUE (mobileCountryCode, mobileNetworkCode)
+);`
 
 class Database {
     // Config should contain:
-    // { host, user, password {, port } }
+    // { host, user, password, database {, port } }
     constructor(config) {
-        this.client = knex({
+        this.client = Knex({
             client: 'mysql2',
             connection: {
-                database: 'central_ledger',
                 ...config
             }
         });
-        this.client.raw(tableCreateStmt);
+    }
+
+    // Initialise the database by running the table create statement
+    async init() {
+        await this.client.raw(tableCreateStmt);
     }
 
     /**
@@ -37,29 +42,27 @@ class Database {
     async isConnected() {
         try {
             const result = await this.client.raw('SELECT 1 + 1 AS result');
-            if (result) {
-                return true;
-            }
-            return false;
+            return (result) ? true : false;
         } catch(err) {
             return false;
         }
     }
 
-    async getPartyInfo(type, id) {
-        return this.client
-            .select()
-            .from('pathfinderOracleCache')
-            .where({ type, id });
-    }
-
-    async setPartyInfo(type, id, participantId) {
-        return this.client('pathfinderOracleCache')
-            .insert({
-                pathfinderOracleCachePartyType: type,
-                pathfinderOracleCachePartyId: id,
-                participantId
-            });
+    /**
+     * Gets the name of the participant specified by mobile country code and mobile network code
+     *
+     * @returns {promise} - name of the participant
+     */
+    async getParticipantNameFromMccMnc(mobileCountryCode, mobileNetworkCode) {
+        const rows = await this.client('participantMno')
+            .innerJoin('participant', 'participant.participantId', 'participantMno.participantId')
+            .where({ mobileCountryCode, mobileNetworkCode })
+            .select('participant.name');
+        if ((!rows) || rows.length < 1) {
+            // no mapping from mnc,mcc to participant in the db
+            return undefined;
+        }
+        return rows[0].name;
     }
 }
 

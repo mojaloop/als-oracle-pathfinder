@@ -10,3 +10,5 @@ Mojaloop [ALS Oracle Template](https://github.com/mojaloop/als-oracle-template).
 * go through and address all TODOs in pathfinder lib
 * use dotenv? inside config.js?
 * make sure pathfinder tests are running
+* bring in validation libs; hapi-openapi is considerably lacking
+* handle currency querystring in get participants by type and id?

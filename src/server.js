@@ -7,6 +7,7 @@ const Config = require('../config/default');
 const Logger = require('@mojaloop/central-services-shared').Logger;
 const Database = require('./db');
 const Pathfinder = require('@lib/pathfinder');
+const util = require('util');
 
 const openAPIOptions = {
     api: Path.resolve(__dirname, './swagger.json'),
@@ -58,7 +59,7 @@ const createServer = async function (config, openAPIPluginOptions) {
         // Create database, pathfinder and append them to server.app
         const db = new Database(config.db);
         const pf = new Pathfinder(config.pathfinder);
-        await pf.connect();
+        await Promise.all([db.init(), pf.connect()])
         server.app.db = db;
         server.app.pf = pf;
 
@@ -90,7 +91,7 @@ const createServer = async function (config, openAPIPluginOptions) {
         await server.start();
         return server;
     } catch (e) {
-        Logger.error(e);
+        Logger.error(util.format(e));
     }
 };
 
@@ -98,19 +99,19 @@ const initialize = async () => {
     const config = await Config.init();
     const server = await createServer(config, openAPIOptions);
 
-    // Perform initial healthcheck
-    const unhealthy = await server.app.healthCheck();
-    if (unhealthy) {
-        throw new Error(unhealthy.message);
-    }
-
     if (server) {
         try {
+            // Perform initial healthcheck
+            const unhealthy = await server.app.healthCheck();
+            if (unhealthy) {
+                throw new Error(unhealthy.message);
+            }
+
             server.plugins.openapi.setHost(server.info.host + ':' + server.info.port);
             server.log('info', `Server running on ${server.info.host}:${server.info.port}`);
             return server;
         } catch (e) {
-            server.log('error', e);
+            server.log('error', util.format(e));
             throw e;
         }
     }

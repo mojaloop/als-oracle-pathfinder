@@ -1,7 +1,7 @@
 'use strict';
 
 const Boom = require('@hapi/boom');
-const responses = require('../../../models/error');
+const responses = require('../../../error');
 const e164 = require('../../../utils/e164');
 
 /**

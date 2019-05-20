@@ -41,8 +41,7 @@ module.exports = {
         // TODO: what currencies are supported?
         const currency = 'XOF';
 
-        // Return an array of parties
-        return h.response([{ currency, fspId }]).code(200);
+        return h.response({ partyList: [{ currency, fspId }] }).code(200);
     },
     /**
      * summary: Return participant information

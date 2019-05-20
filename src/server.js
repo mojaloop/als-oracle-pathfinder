@@ -84,7 +84,7 @@ const createServer = async function (config, openAPIPluginOptions) {
                 if (res) {
                     return h.response({ ...res, statusCode: 500, error: 'Internal Server Error' }).code(500);
                 }
-                return h.response().code(200);
+                return h.response().code(200); // 200 expected by k8s, should be 204
             }
         });
 

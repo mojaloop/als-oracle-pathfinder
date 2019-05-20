@@ -9,6 +9,4 @@ const responses = {
     PARTY_NOT_FOUND: () => Boom.notFound('Party not found')
 };
 
-// const errors = Object.assign({}, ...Object.entries(results).map(([name, error]) => ({ [name]: () => new Boom(error()) })));
-
 module.exports = responses;

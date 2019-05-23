@@ -21,6 +21,7 @@
 const util = require('util');
 const pp = util.inspect;
 const tls = require('tls');
+const { nullLogger } = require('./utils');
 
 const dnsPacket = require('dns-packet');
 
@@ -64,7 +65,7 @@ const DNS_MAX_ID = 65534;
  * Pathfinder resolver that connects over TLSv1.2
  */
 module.exports = class TlsResolver {
-    constructor(config, { logger = () => {} } = {}) {
+    constructor(config, { logger = nullLogger } = {}) {
         // DOCUMENTATION:
         // Query timeouts will begin to elapse as soon as a message is queued. This is to prevent
         // an indefinite build-up of messages in the queue.
@@ -111,7 +112,7 @@ module.exports = class TlsResolver {
             //secureContext: context, //pathfinder does not support tls1.2?
         };
 
-        this.logger('Using TLS socket options:', socketOpts);
+        this.logger.info('Using TLS socket options:', socketOpts);
 
         return new Promise((resolve, reject) => {
             // Explicitly allowing any error to bubble up
@@ -119,7 +120,7 @@ module.exports = class TlsResolver {
                 this.socket = tempSocket;
                 const peerCert = this.socket.getPeerCertificate();
 
-                this.logger(
+                this.logger.info(
                     util.format('Connected to pathfinder host at %s:%s identifying itself with certificate: %s',
                         this.config.tls.host, this.config.tls.port, pp(peerCert)));
 
@@ -164,8 +165,8 @@ module.exports = class TlsResolver {
         const now = Date.now();
         let nextKeepAlive = this.latestSuccessfulSendTime + keepAliveIntervalMs;
         if (now > nextKeepAlive) {
-            this.logger('Sending keepalive message');
-            this.query('').catch(err => this.logger('Error on keepalive message', err));
+            this.logger.debug('Sending keepalive message');
+            this.query('').catch(err => this.logger.warn('Error on keepalive message', err));
             nextKeepAlive = now + keepAliveIntervalMs;
         }
         this.keepAliveTimer = setTimeout(this.keepAlive.bind(this, keepAliveIntervalMs), nextKeepAlive - now);
@@ -186,12 +187,12 @@ module.exports = class TlsResolver {
     }
 
     destroy() {
-        this.logger('Destroying TLS resolver...');
+        this.logger.debug('Destroying TLS resolver...');
         if(this.socket) {
             this.socket.destroy();
             this.socket = null;
         }
-        this.logger('Destroyed TLS resolver');
+        this.logger.debug('Destroyed TLS resolver');
     }
 
     _queueMessage(message) {
@@ -258,7 +259,7 @@ module.exports = class TlsResolver {
         try {
             this.connect();
         } catch(err) {
-            this.logger('FATAL. Pathfinder connect failed.', err);
+            this.logger.error('FATAL. Pathfinder connect failed.', err);
             process.exit(1);
         }
     }
@@ -267,7 +268,7 @@ module.exports = class TlsResolver {
         // If our message timed out and there have been no successful queries since we attempted
         // it, we'll attempt reconnect; otherwise we'll retry the message
         if (this.latestSuccessfulSendTime < message.sentAt) {
-            this.logger('Pathfinder timed out. Attempting reconnect.');
+            this.logger.warn('Pathfinder timed out. Attempting reconnect.');
             this._attemptReconnect();
         } else {
             this._queueMessage(message);
@@ -277,12 +278,12 @@ module.exports = class TlsResolver {
     _handleSocketError(err) {
         // TODO: characterise possible errors- maybe we can handle
         // different errors differently to increase robustness
-        this.logger('Socket error. Attempting reconnect.', err);
+        this.logger.error('Socket error. Attempting reconnect.', err);
         this._attemptReconnect();
     }
 
     _handleSocketData(data) {
-        this.logger('Received %d bytes', data.byteLength);
+        this.logger.debug('Received %d bytes', data.byteLength);
 
         // decode the message
         if (this.data.response == null) {
@@ -292,7 +293,7 @@ module.exports = class TlsResolver {
                 const plen = data.readUInt16BE(0);
                 this.data.expectedLength = plen;
                 if (plen < 12) {
-                    this.logger('below DNS minimum packet length');
+                    this.logger.debug('below DNS minimum packet length');
                 }
                 this.data.response = Buffer.from(data);
             }
@@ -303,7 +304,7 @@ module.exports = class TlsResolver {
 
         if (this.data.response.byteLength >= this.data.expectedLength) {
             let resp = dnsPacket.streamDecode(this.data.response);
-            this.logger('Decoded dns response message: %s', pp(resp));
+            this.logger.info('Decoded dns response message: %s', pp(resp));
 
             if (resp.answers.length > 1) {
                 // TODO: We don't know what to do with multiple answers. We really shouldn't
@@ -341,7 +342,7 @@ module.exports = class TlsResolver {
                     .filter(e => /^.+=.+$/.test(e)) // remove anything that doesn't match .+=.+
                     .map(parseResp) // split on = and turn into k,v
                     .reduce((pv, cv) => ({ ...pv, ...cv })); // put all the k,v results of the map into one object
-                this.logger('Got mcc', result.mcc, 'and mnc', result.mnc);
+                this.logger.info('Got mcc', result.mcc, 'and mnc', result.mnc);
 
                 // make the callback
                 return message.resolve(result);
@@ -403,7 +404,7 @@ module.exports = class TlsResolver {
         // TODO: what are the pros and cons of using this.lastTick vs. Date.now() here?
         message.sentAt = this.lastTick;
         message.pathfinderTimer = setTimeout(this._handlePathfinderTimeout.bind(this, message), this.config.pathfinderTimeoutMs);
-        this.logger('Querying pathfinder:', message.request);
+        this.logger.info('Querying pathfinder:', message.request);
 
         // give the query a unique id
         message.request.id = this._genMessageId();

@@ -18,8 +18,7 @@
 // - this code implements a stream abstraction. There are stream libraries for js that we should
 //   consider replacing this implementation with.
 
-const util = require('util');
-const pp = util.inspect;
+const { inspect: pp, format: fmt } = require('util');
 const tls = require('tls');
 const { nullLogger } = require('./utils');
 
@@ -71,7 +70,13 @@ module.exports = class TlsResolver {
         // an indefinite build-up of messages in the queue.
         this.config = config;
         this.messagesInFlight = {};
-        this.logger = logger;
+        // Wrap logger methods so we don't have to use util.format to pass multiple arguments
+        this.logger = {
+            debug: (...args) => logger.debug(fmt(...args)),
+            info: (...args) => logger.info(fmt(...args)),
+            warn: (...args) => logger.warn(fmt(...args)),
+            error: (...args) => logger.error(fmt(...args))
+        };
         this.waitQueue = [];
         this.pendingCb = null;
         this.socket = null;
@@ -98,30 +103,22 @@ module.exports = class TlsResolver {
     // queued.
     // connectFunction is parametrised for testing
     connect(connectFunction = tls.connect) {
-        // TODO: use context?
-        // const secureContext = tls.createSecureContext({
+        // let socketOpts = {
+        //     ...this.config.tls,
+        //     // TODO: specify protocol?
         //     secureProtocol: 'TLSv1_2_method'
-        // });
-        let socketOpts = {
-            ...this.config.tls,
-            // TODO: expect an array always. This means flattening the read-in .ca before passing
-            // it here
-            ca: Array.isArray(this.config.tls.ca) ? this.config.tls.ca : [this.config.tls.ca]
-            // TODO: try these options
-            //requestCert: true,
-            //secureContext: context, //pathfinder does not support tls1.2?
-        };
+        // };
 
-        this.logger.info('Using TLS socket options:', socketOpts);
+        this.logger.info('Using TLS socket options:', this.config.tls);
 
         return new Promise((resolve, reject) => {
             // Explicitly allowing any error to bubble up
-            const tempSocket = connectFunction(socketOpts, () => {
+            const tempSocket = connectFunction(this.config.tls, () => {
                 this.socket = tempSocket;
                 const peerCert = this.socket.getPeerCertificate();
 
                 this.logger.info(
-                    util.format('Connected to pathfinder host at %s:%s identifying itself with certificate: %s',
+                    fmt('Connected to pathfinder host at %s:%s identifying itself with certificate: %s',
                         this.config.tls.host, this.config.tls.port, pp(peerCert)));
 
                 // Start handling the queue

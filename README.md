@@ -5,6 +5,7 @@ Mojaloop [ALS Oracle Template](https://github.com/mojaloop/als-oracle-template).
 ## TODO
 * NOTE THAT MANY OF THESE TODOS PROBABLY APPLY TO THE MERCHANT ORACLE ALSO
 * HANDLE CURRENCY IN RETURN VALUE CORRECTLY!
+* add merchant id regex validation to merchant oracle swagger
 * import openapi validation? port swagger to openapi?
 * import header validation
 * handle currency querystring in get participants by type and id?

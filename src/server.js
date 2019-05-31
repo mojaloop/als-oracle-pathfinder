@@ -5,9 +5,18 @@ const HapiOpenAPI = require('hapi-openapi');
 const Path = require('path');
 const Config = require('../config/default');
 const Logger = require('@mojaloop/central-services-shared').Logger;
-const Database = require('./db');
+const { CentralLedgerDatabase, ALSDatabase } = require('./db');
 const Pathfinder = require('@lib/pathfinder');
 const util = require('util');
+
+// Wrap logger methods so we don't have to use util.format to pass multiple arguments
+const logger = {
+    ...Logger,
+    debug: (...args) => Logger.debug(util.format(...args)),
+    info: (...args) => Logger.info(util.format(...args)),
+    warn: (...args) => Logger.warn(util.format(...args)),
+    error: (...args) => Logger.error(util.format(...args))
+};
 
 const openAPIOptions = {
     api: Path.resolve(__dirname, './swagger.json'),
@@ -57,7 +66,7 @@ const createServer = async function (config, openAPIPluginOptions) {
         ]);
 
         // Create database, pathfinder and append them to server.app
-        const db = new Database(config.db);
+        const db = new CentralLedgerDatabase(config.db);
         const pf = new Pathfinder(config.pathfinder);
         await Promise.all([db.init(), pf.connect()])
         server.app.db = db;
@@ -91,12 +100,18 @@ const createServer = async function (config, openAPIPluginOptions) {
         await server.start();
         return server;
     } catch (e) {
-        Logger.error(util.format(e));
+        logger.error(e);
     }
 };
 
 const initialize = async () => {
     const config = await Config.init();
+    logger.info('Configuration', config);
+
+    // Initialise the oracle information in the database
+    const alsDb = new ALSDatabase(config.alsDb, config.serviceName);
+    await alsDb.init();
+
     const server = await createServer(config, openAPIOptions);
 
     if (server) {
@@ -120,5 +135,5 @@ const initialize = async () => {
 try {
     initialize();
 } catch (e) {
-    Logger.error(e);
+    logger.error(e);
 }

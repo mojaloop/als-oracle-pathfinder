@@ -29,10 +29,11 @@
         "swagmock": "1.0.0"
     },
     "scripts": {
-        "start": "node ./src/server",
-        "test": "ava",
+        "build": "docker build -t als-oracle-pathfinder -f ./Dockerfile .",
         "lint": "eslint .",
-        "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'"
+        "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
+        "start": "node ./src/server",
+        "test": "ava"
     },
     "generator-swaggerize": {
         "version": "4.1.0"

@@ -50,7 +50,7 @@
             "description": "The ID related to the Type, if MSISDN then this is the mobile number being requested"
           },
           {
-            "name": "Currency",
+            "name": "currency",
             "in": "query",
             "required": false,
             "type": "string",

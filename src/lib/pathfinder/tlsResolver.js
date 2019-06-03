@@ -70,13 +70,7 @@ module.exports = class TlsResolver {
         // an indefinite build-up of messages in the queue.
         this.config = config;
         this.messagesInFlight = {};
-        // Wrap logger methods so we don't have to use util.format to pass multiple arguments
-        this.logger = {
-            debug: (...args) => logger.debug(fmt(...args)),
-            info: (...args) => logger.info(fmt(...args)),
-            warn: (...args) => logger.warn(fmt(...args)),
-            error: (...args) => logger.error(fmt(...args))
-        };
+        this.logger = logger;
         this.waitQueue = [];
         this.pendingCb = null;
         this.socket = null;

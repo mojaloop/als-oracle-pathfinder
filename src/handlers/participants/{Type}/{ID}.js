@@ -25,6 +25,10 @@ module.exports = {
             return responses.E164_INVALID();
         }
 
+        // Function to filter the result by the currency
+        const filterF =
+            req.query.currency === undefined ? () => true : e => e.currency === req.query.currency;
+
         // Mobile country code (mcc), mobile network code (mnc) together uniquely identify an mno
         const { mcc, mnc } = await req.server.app.pf.query(req.params.ID);
         if (mcc === undefined || mnc === undefined) {
@@ -33,15 +37,12 @@ module.exports = {
         req.server.log(['info'], `[ mcc, mnc ] = [ ${mcc}, ${mnc} ]`)
 
         // Get the participant info from the db
-        const fspId = await req.server.app.db.getParticipantNameFromMccMnc(mcc, mnc);
-        if (fspId === undefined) {
+        const partyList = await req.server.app.db.getParticipantInfoFromMccMnc(mcc, mnc);
+        if (partyList.length === 0) {
             return responses.FSP_NOT_FOUND();
         }
 
-        // TODO: what currencies are supported?
-        const currency = 'XOF';
-
-        return h.response({ partyList: [{ currency, fspId }] }).code(200);
+        return h.response(partyList.filter(filterF)).code(200);
     },
     /**
      * summary: Return participant information

@@ -110,16 +110,18 @@ class CentralLedgerDatabase extends Database {
      *
      * @returns {promise} - name of the participant
      */
-    async getParticipantNameFromMccMnc(mobileCountryCode, mobileNetworkCode) {
+    async getParticipantInfoFromMccMnc(mobileCountryCode, mobileNetworkCode) {
         const rows = await this.client('participantMno')
-            .innerJoin('participant', 'participant.participantId', 'participantMno.participantId')
-            .where({ mobileCountryCode, mobileNetworkCode })
-            .select('participant.name');
+            .innerJoin('participant AS p', 'p.participantId', 'participantMno.participantId')
+            .innerJoin('participantCurrency AS pc', 'pc.participantId', 'p.participantId')
+            .innerJoin('ledgerAccountType AS lat', 'pc.ledgerAccountTypeId', 'lat.ledgerAccountTypeId')
+            .where({ mobileCountryCode, mobileNetworkCode, 'lat.name': 'POSITION' })
+            .select(['p.name AS fspId', 'pc.currencyId AS currency']);
         if ((!rows) || rows.length < 1) {
             // no mapping from mnc,mcc to participant in the db
             return undefined;
         }
-        return rows[0].name;
+        return rows;
     }
 }
 

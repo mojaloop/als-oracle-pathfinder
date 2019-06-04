@@ -3,7 +3,7 @@
 const Hapi = require('@hapi/hapi');
 const HapiOpenAPI = require('hapi-openapi');
 const Path = require('path');
-const Config = require('../config/default');
+const Config = require('./config');
 const Logger = require('@mojaloop/central-services-shared').Logger;
 const { CentralLedgerDatabase, ALSDatabase } = require('./db');
 const Pathfinder = require('@lib/pathfinder');

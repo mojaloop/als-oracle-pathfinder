@@ -32,7 +32,7 @@
         "build": "docker build -t als-oracle-pathfinder -f ./Dockerfile .",
         "lint": "eslint .",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
-        "start": "node ./src/server",
+        "start": "node ./src/index",
         "test": "ava"
     },
     "generator-swaggerize": {

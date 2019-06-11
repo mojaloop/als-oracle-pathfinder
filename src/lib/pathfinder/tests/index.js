@@ -12,7 +12,7 @@ const Pathfinder = require('../');
 const mockSocket = require('../mocksocket');
 const Chance = require('chance');
 const dnsPacket = require('dns-packet');
-const opts = { logger: console.log.bind(console) };
+const opts = { logger: console.log.bind(console) }; // eslint-disable-line no-console
 
 // TODO: considering the following note, tests using known good responses, and known bad responses
 // should probably be updated. Perhaps just to perform a more nuanced check on the result of the

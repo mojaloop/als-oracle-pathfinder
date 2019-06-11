@@ -12,8 +12,7 @@ require('dotenv').config({ path: path.resolve(__dirname, `${rootDir}/.env`) });
 
 const defaultConf = {
     server: {
-        port: process.env.SERVER_PORT,
-        debug: { 'request': '*' }
+        port: process.env.SERVER_PORT
     },
     alsDb: {
         host: process.env.DB_HOST,

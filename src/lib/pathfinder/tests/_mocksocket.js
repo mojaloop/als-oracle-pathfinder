@@ -17,7 +17,7 @@ class MockSocket extends EventEmitter {
     // Interface used by tlsResolver
 
     destroy() {
-        this.logger('MockSocket.destroy() called');
+        this.logger.info('MockSocket.destroy() called');
         this.destroyF(this, ++this.destroyCallCount);
     }
 
@@ -26,7 +26,7 @@ class MockSocket extends EventEmitter {
     }
 
     write(buf) {
-        this.logger('MockSocket.write() called with', buf);
+        this.logger.info('MockSocket.write() called with', buf);
         this.writeF(this, buf);
     }
 

@@ -33,7 +33,7 @@
         "lint": "eslint .",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
         "start": "node ./src/index",
-        "test": "ava"
+        "test": "ava ./test ./src/lib/pathfinder/tests/"
     },
     "generator-swaggerize": {
         "version": "4.1.0"

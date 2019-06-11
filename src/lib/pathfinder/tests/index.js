@@ -1,7 +1,8 @@
 'use strict';
 
-// NOTE: any test that hits the pathfinder CTE should be considered for serialising. At the time of
-// writing, all are.
+// NOTE: any test that hits the pathfinder CTE should be considered for serialising. This is
+// because the rate limits on this environment are quite low, therefore parallel tests might cause
+// failures due to these rate limits, which could be misleading. At the time of writing, all are.
 
 // TODO:
 // - test module crashes fatally upon failed reconnect
@@ -9,10 +10,15 @@ const test = require('ava');
 const Config = require('../config');
 const _conf = new Config();
 const Pathfinder = require('../');
-const mockSocket = require('../mocksocket');
+const mockSocket = require('./_mocksocket');
 const Chance = require('chance');
 const dnsPacket = require('dns-packet');
-const opts = { logger: console.log.bind(console) }; // eslint-disable-line no-console
+const consoleLogger = console.log.bind(console);
+const nullLogger = () => {};
+// Set l = consoleLogger to log output
+const l = nullLogger;
+const opts = { logger: { warn: l, info: l, debug: l, error: l } }; // eslint-disable-line no-console
+// const opts = { logger: console.log.bind(console) }; // eslint-disable-line no-console
 
 // TODO: considering the following note, tests using known good responses, and known bad responses
 // should probably be updated. Perhaps just to perform a more nuanced check on the result of the

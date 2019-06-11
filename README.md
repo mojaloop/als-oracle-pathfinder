@@ -3,6 +3,9 @@ An Account Lookup Service Oracle for GSMA Pathfinder resolution of MSISDNs. Code
 Mojaloop [ALS Oracle Template](https://github.com/mojaloop/als-oracle-template).
 
 ## TODO
+* modify the chart to accept a couple of healthcheck failures
+* modify chart to have a redundant instance
+* handle the failing pathfinder heartbeats properly
 * Generally fix up swagger
 * NOTE THAT MANY OF THESE TODOS PROBABLY APPLY TO THE MERCHANT ORACLE ALSO
 * add merchant id regex validation to merchant oracle swagger

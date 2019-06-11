@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS participantMno (
         UNIQUE INDEX (participantId, mobileCountryCode, mobileNetworkCode),
     CONSTRAINT participantmno_mobilecountrycode_mobilenetworkcode_unique
         UNIQUE (mobileCountryCode, mobileNetworkCode)
-);`)
+);`);
 
 
 const partyIdTypeName = 'MSISDN';
@@ -44,8 +44,7 @@ const alsInitStatements = (serviceName, client) => Promise.all([
             )
             ON DUPLICATE KEY UPDATE value = ?;
         `, [serviceName, serviceName])
-        ]
-    ))
+    ]))
 ]);
 
 

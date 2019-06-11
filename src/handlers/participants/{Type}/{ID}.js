@@ -32,9 +32,9 @@ module.exports = {
         // Mobile country code (mcc), mobile network code (mnc) together uniquely identify an mno
         const { mcc, mnc } = await req.server.app.pf.query(req.params.ID);
         if (mcc === undefined || mnc === undefined) {
-            return h.response(errors.PARTY_NOT_FOUND).code(errors.PARTY_NOT_FOUND.statusCode);
+            return responses.PARTY_NOT_FOUND();
         }
-        req.server.log(['info'], `[ mcc, mnc ] = [ ${mcc}, ${mnc} ]`)
+        req.server.log(['info'], `[ mcc, mnc ] = [ ${mcc}, ${mnc} ]`);
 
         // Get the participant info from the db
         const partyList = await req.server.app.db.getParticipantInfoFromMccMnc(mcc, mnc);

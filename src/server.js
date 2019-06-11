@@ -68,7 +68,7 @@ const createServer = async function (config, openAPIPluginOptions) {
         // Create database, pathfinder and append them to server.app
         const db = new CentralLedgerDatabase(config.db);
         const pf = new Pathfinder(config.pathfinder);
-        await Promise.all([db.init(), pf.connect()])
+        await Promise.all([db.init(), pf.connect()]);
         server.app.db = db;
         server.app.pf = pf;
 

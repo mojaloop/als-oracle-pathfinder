@@ -15,12 +15,12 @@ const pfLogger = {
     error: (...args) => Logger.error(util.format(...args))
 };
 
-// Set log level to info
-Logger.transports.forEach(t => t.level = 'info');
-
 const initialize = async () => {
+    pfLogger.info('Configuration:\n', Config.defaultConf);
     const config = await Config.init();
-    pfLogger.info('Configuration', config);
+
+    // Set log level to info
+    Logger.transports.forEach(t => t.level = config.logLevel);
 
     const centralLedgerDb = new CentralLedgerDatabase(config.db);
     const pathfinder = new Pathfinder(config.pathfinder);

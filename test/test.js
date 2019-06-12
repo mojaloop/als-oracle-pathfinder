@@ -70,7 +70,7 @@ test('health-check fails if db is not connected', async t => {
     t.is(response.statusCode, 500);
 });
 
-test('test get participants by type and id, invalid E164', async t => {
+test.only('test get participants by type and id, invalid E164', async t => {
     const expectedResult = [{ fspId: 'test', currency: 'TEST' }];
     t.context.server.app.db.getPartyParticipant = () => expectedResult;
     const response = await t.context.server.inject({
@@ -79,7 +79,6 @@ test('test get participants by type and id, invalid E164', async t => {
         url: '/participants/MSISDN/blah'
     });
     t.is(response.statusCode, 400);
-    console.log(response.payload);
     t.deepEqual(JSON.parse(response.payload), {
         statusCode: 400,
         error: 'Bad Request',

@@ -30,13 +30,6 @@ let resolver = new TlsResolver(config, () => {});
              }))
     );
 
-    // TODO: remove PII:
-    // lookup james bush cell: 0044 7710 066 017
-    //const queryMsg = '0044 7710 066 017';
-    //console.log('Querying resolver with', queryMsg);
-
-    //const res = await resolver.query(queryMsg);
-
     resolver.destroy();
     console.log('Test complete.');
 

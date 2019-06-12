@@ -12,7 +12,6 @@
 //     DNS_MAX_ID (set this to a small value to test) messages?
 // - test TCP failure during operation- pathologically destroy the tls socket
 //   from outside the app
-// - implement pathfinder "keep-alive"
 // - lint
 // - automated tests. consider socket.emit('error', new Error('some message'))
 // - this code implements a stream abstraction. There are stream libraries for js that we should

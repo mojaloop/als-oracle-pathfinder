@@ -294,7 +294,8 @@ module.exports = class TlsResolver {
 
         if (this.data.response.byteLength >= this.data.expectedLength) {
             let resp = dnsPacket.streamDecode(this.data.response);
-            this.logger.info('Decoded dns response message: %s', pp(resp));
+            this.logger.info('Complete message received');
+            this.logger.debug('Decoded dns response message: %s', pp(resp));
 
             if (resp.answers.length > 1) {
                 // TODO: We don't know what to do with multiple answers. We really shouldn't

@@ -15,6 +15,9 @@ const pfLogger = {
     error: (...args) => Logger.error(util.format(...args))
 };
 
+// Set log level to info
+Logger.transports.forEach(t => t.level = 'info');
+
 const initialize = async () => {
     const config = await Config.init();
     pfLogger.info('Configuration', config);

@@ -22,6 +22,10 @@ CREATE TABLE IF NOT EXISTS participantMno (
 const partyIdTypeName = 'MSISDN';
 const partyIdTypeDesc = 'A MSISDN (Mobile Station International Subscriber Directory Number, that is, the phone number) is used as reference to a participant. The MSISDN identifier should be in international format according to the ITU-T E.164 standard. Optionally, the MSISDN may be prefixed by a single plus sign, indicating the international prefix.';
 const createdBy = 'ALS Pathfinder Oracle';
+const appendHttpToServiceName = serviceName =>
+    serviceName.startsWith('http://') || serviceName.startsWith('https://')
+        ? serviceName
+        : `http://${serviceName}`;
 const alsInitStatements = (serviceName, client) => Promise.all([
     // 1) Upsert the party id type
     client.raw(`
@@ -43,7 +47,7 @@ const alsInitStatements = (serviceName, client) => Promise.all([
                 1
             )
             ON DUPLICATE KEY UPDATE value = ?;
-        `, [serviceName, serviceName])
+        `, [appendHttpToServiceName(serviceName), appendHttpToServiceName(serviceName)])
     ]))
 ]);
 

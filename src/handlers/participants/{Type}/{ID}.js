@@ -38,7 +38,7 @@ module.exports = {
 
         // Get the participant info from the db
         const partyList = await req.server.app.db.getParticipantInfoFromMccMnc(mcc, mnc);
-        if (partyList.length === 0) {
+        if (partyList === null) {
             return responses.FSP_NOT_FOUND();
         }
 

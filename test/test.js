@@ -70,7 +70,7 @@ test('health-check fails if db is not connected', async t => {
     t.is(response.statusCode, 500);
 });
 
-test.only('test get participants by type and id, invalid E164', async t => {
+test('test get participants by type and id, invalid E164', async t => {
     const expectedResult = [{ fspId: 'test', currency: 'TEST' }];
     t.context.server.app.db.getPartyParticipant = () => expectedResult;
     const response = await t.context.server.inject({
@@ -145,7 +145,7 @@ test('test get parties by type and id, currency query param negative response', 
     };
     t.context.server.app.db.getParticipantInfoFromMccMnc = (mcc, mnc) => {
         t.deepEqual(pfResult, { mcc, mnc });
-        return [];
+        return null;
     };
     const response = await t.context.server.inject({
         method: 'get',
@@ -167,7 +167,7 @@ test('test get parties by type and id, mcc, mnc invalid', async t => {
     t.context.server.app.pf.query = () => ({});
     t.context.server.app.db.getParticipantInfoFromMccMnc = (mcc, mnc) => {
         t.deepEqual(pfResult, { mcc, mnc });
-        return [];
+        return null;
     };
     const response = await t.context.server.inject({
         method: 'get',

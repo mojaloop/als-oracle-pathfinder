@@ -116,10 +116,12 @@ class CentralLedgerDatabase extends Database {
             .innerJoin('ledgerAccountType AS lat', 'pc.ledgerAccountTypeId', 'lat.ledgerAccountTypeId')
             .where({ mobileCountryCode, mobileNetworkCode, 'lat.name': 'POSITION' })
             .select(['p.name AS fspId', 'pc.currencyId AS currency']);
+
         if ((!rows) || rows.length < 1) {
             // no mapping from mnc,mcc to participant in the db
-            return undefined;
+            return null;
         }
+
         return rows;
     }
 }

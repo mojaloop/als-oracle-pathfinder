@@ -87,7 +87,7 @@ test('test get participants by type and id, invalid E164', async t => {
 });
 
 test('test get parties by type and id, no currency', async t => {
-    const expectedResult = [{ fspId: 'test', currency: 'TEST' }];
+    const expectedResult = { partyList: [{ fspId: 'test', currency: 'TEST' }] };
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
     t.context.server.app.pf.query = (msisdnPf) => {
@@ -96,7 +96,7 @@ test('test get parties by type and id, no currency', async t => {
     };
     t.context.server.app.db.getParticipantInfoFromMccMnc = (mcc, mnc) => {
         t.deepEqual(pfResult, { mcc, mnc });
-        return expectedResult;
+        return expectedResult.partyList;
     };
     const response = await t.context.server.inject({
         method: 'get',
@@ -108,7 +108,7 @@ test('test get parties by type and id, no currency', async t => {
 });
 
 test('test get parties by type and id, currency query param positive response', async t => {
-    const expectedResult = [{ fspId: 'test', currency: 'TEST' }];
+    const expectedResult = { partyList: [{ fspId: 'test', currency: 'TEST' }] };
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
     t.context.server.app.pf.query = (msisdnPf) => {
@@ -118,7 +118,7 @@ test('test get parties by type and id, currency query param positive response', 
     t.context.server.app.db.getParticipantInfoFromMccMnc = (mcc, mnc) => {
         t.deepEqual(pfResult, { mcc, mnc });
         return [
-            ...expectedResult,
+            ...expectedResult.partyList,
             { fspId: 'blah', currency: 'TESTWHATEVER' }
         ];
     };

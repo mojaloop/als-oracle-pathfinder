@@ -37,12 +37,12 @@ module.exports = {
         req.server.log(['info'], `[ mcc, mnc ] = [ ${mcc}, ${mnc} ]`);
 
         // Get the participant info from the db
-        const partyList = await req.server.app.db.getParticipantInfoFromMccMnc(mcc, mnc);
-        if (partyList === null) {
+        const parties = await req.server.app.db.getParticipantInfoFromMccMnc(mcc, mnc);
+        if (parties === null) {
             return responses.FSP_NOT_FOUND();
         }
 
-        return h.response(partyList.filter(filterF)).code(200);
+        return h.response({ partyList: parties.filter(filterF) }).code(200);
     },
     /**
      * summary: Return participant information

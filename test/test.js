@@ -158,9 +158,7 @@ test('test get parties by type and id, currency query param negative response', 
 
 test('test get parties by type and id, mcc, mnc invalid', async t => {
     const expectedResult = {
-        statusCode: 404,
-        error: 'Not Found',
-        message: { errorInformation: { errorDescription: 'Party not found' } }
+        partyList: []
     };
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
@@ -174,6 +172,6 @@ test('test get parties by type and id, mcc, mnc invalid', async t => {
         headers,
         url: `/participants/MSISDN/${msisdn}?currency=BLAH`
     });
-    t.is(response.statusCode, 404);
+    t.is(response.statusCode, 200);
     t.deepEqual(JSON.parse(response.payload), expectedResult);
 });

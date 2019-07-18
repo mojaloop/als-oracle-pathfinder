@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "als-oracle-pathfinder-chart.fullname" . }}
+  labels:
+    app: {{ template "als-oracle-pathfinder-chart.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  # Should correspond to the service name in service.yaml
+  ALS_SERVICE_NAME: {{ template "als-oracle-pathfinder-chart.fullname" . }}
+  DB_USER: {{ .Values.db.user | quote }}
+  DB_HOST: {{ .Values.db.host | quote }}
+  DB_PORT: {{ default "3306" .Values.db.port | quote }}
+  DB_NAME_CENTRAL_LEDGER: {{ .Values.db.schema | quote }}
+  DB_NAME_ACCOUNT_LOOKUP: {{ .Values.accountLookupDbSchema | quote }}
+  SERVER_PORT: {{ .Values.service.port | quote }}
+  PATHFINDER_TLS_HOST: {{ .Values.pathfinder.host | quote }}
+  PATHFINDER_TLS_PORT: {{ .Values.pathfinder.port | quote }}
+  PATHFINDER_REJECT_UNAUTHORIZED: {{ (.Values.pathfinder.tls.rejectUnauthorized | quote) | default "true" }}
+  PATHFINDER_QUERY_TIMEOUT_MS: {{ default "10000" .Values.pathfinder.queryTimeoutMs | quote }}
+  PATHFINDER_MAX_QUERIES_PER_SECOND: {{ default "50" .Values.pathfinder.maxQueriesPerSecond | quote }}
+  PATHFINDER_KEEPALIVE_INTERVAL_MS: {{ default "45000" .Values.pathfinder.keepAliveIntervalMs | quote }}
+  PATHFINDER_TIMEOUT_MS: {{ default "5000" .Values.pathfinder.timeoutMs | quote }}
+  PATHFINDER_CLIENT_KEY_FILEPATH: "/secrets/clientkey.pem"
+  PATHFINDER_CLIENT_CERT_FILEPATH: "/secrets/clientcert.pem"
+  PATHFINDER_CERT_FILEPATH: "/secrets/pathfindercert.pem"
+  PATHFINDER_INTERMEDIATE_CHAIN: "/secrets/pathfinderintermediatecert.pem"

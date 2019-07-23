@@ -26,14 +26,14 @@ const appendHttpToServiceName = serviceName =>
     serviceName.startsWith('http://') || serviceName.startsWith('https://')
         ? serviceName
         : `http://${serviceName}`;
-const alsInitStatements = (serviceName, client) => Promise.all([
+const alsInitStatements = (serviceName, client) => [
     // 1) Upsert the party id type
     client.raw(`
         INSERT IGNORE INTO partyIdType(name, description)
         VALUES ('${partyIdTypeName}', '${partyIdTypeDesc}')
         `),
     // 2) Inside a transaction
-    client.transaction(trx => Promise.all([
+    client.transaction(trx => [
         // 2.1 disable old endpoints created by this service
         trx.raw(`UPDATE oracleEndpoint oe SET oe.isActive=0, oe.isDefault=0 WHERE oe.createdBy='${createdBy}'`),
         // 2.2 and create and enable this service
@@ -48,8 +48,8 @@ const alsInitStatements = (serviceName, client) => Promise.all([
             )
             ON DUPLICATE KEY UPDATE value = ?;
         `, [appendHttpToServiceName(serviceName), appendHttpToServiceName(serviceName)])
-    ]))
-]);
+    ].reduce((p, fn) => p.then(fn), Promise.resolve()))
+].reduce((p, fn) => p.then(fn), Promise.resolve());
 
 
 class Database {

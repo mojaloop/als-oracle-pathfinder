@@ -51,7 +51,7 @@ module.exports = {
      * produces: application/json
      * responses: 200, 400, 401, 403, 404, 405, 406, 501, 503
      */
-    put: function ParticipantsByTypeAndIDPut(req, h) {
+    put: function ParticipantsByTypeAndIDPut() {
         return Boom.notImplemented();
     },
     /**
@@ -61,7 +61,7 @@ module.exports = {
      * produces: application/json
      * responses: 201, 400, 401, 403, 404, 405, 406, 501, 503
      */
-    post: function ParticipantsByTypeAndIDPost(req, h) {
+    post: function ParticipantsByTypeAndIDPost() {
         return Boom.notImplemented();
     },
     /**
@@ -71,7 +71,7 @@ module.exports = {
      * produces: application/json
      * responses: 204, 400, 401, 403, 404, 405, 406, 501, 503
      */
-    delete: function ParticipantsByTypeAndIDDelete(req, h) {
+    delete: function ParticipantsByTypeAndIDDelete() {
         return Boom.notImplemented();
     }
 };

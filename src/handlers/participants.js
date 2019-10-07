@@ -13,7 +13,7 @@ module.exports = {
      * produces: application/json
      * responses: 201, 400, 401, 403, 404, 405, 406, 501, 503
      */
-    post: function ParticipantsPost(request, h) {
+    post: function ParticipantsPost() {
         return Boom.notImplemented();
     }
 };

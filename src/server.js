@@ -10,7 +10,7 @@ const openAPIOptions = {
     handlers: Path.resolve(__dirname, './handlers')
 };
 
-module.exports.createServer = async function({ config, centralLedgerDb, pathfinder, alsDb }) {
+module.exports.createServer = async function({ config, centralLedgerDb, pathfinder }) {
     try {
         const server = new Hapi.Server(config.server);
         await server.register([
@@ -53,7 +53,7 @@ module.exports.createServer = async function({ config, centralLedgerDb, pathfind
         ]);
 
         // Create database, pathfinder and append them to server.app
-        await Promise.all([centralLedgerDb.init(), pathfinder.connect(), alsDb.init()]);
+        await pathfinder.connect();
         server.app.db = centralLedgerDb;
         server.app.pf = pathfinder;
 

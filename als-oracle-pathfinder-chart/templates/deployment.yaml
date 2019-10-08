@@ -1,21 +1,21 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "als-oracle-pathfinder-chart.fullname" . }}
+  name: {{ template "als-oracle-pathfinder.fullname" . }}
   labels:
-    app: {{ template "als-oracle-pathfinder-chart.name" . }}
-    chart: {{ template "als-oracle-pathfinder-chart.chart" . }}
+    app: {{ template "als-oracle-pathfinder.name" . }}
+    chart: {{ template "als-oracle-pathfinder.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   selector:
     matchLabels:
-      app: {{ template "als-oracle-pathfinder-chart.name" . }}
+      app: {{ template "als-oracle-pathfinder.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "als-oracle-pathfinder-chart.name" . }}
+        app: {{ template "als-oracle-pathfinder.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -35,17 +35,17 @@ spec:
             path: /
             port: http
         volumeMounts:
-        - name: {{ template "als-oracle-pathfinder-chart.fullname" . }}-tls
+        - name: {{ template "als-oracle-pathfinder.fullname" . }}-tls
           mountPath: {{ .Values.pathfinder.secretsMountPoint }}
         envFrom:
         - configMapRef:
-            name: {{ template "als-oracle-pathfinder-chart.fullname" . }}
+            name: {{ template "als-oracle-pathfinder.fullname" . }}
         - secretRef:
-            name:  {{ template "als-oracle-pathfinder-chart.fullname" . }}-db
+            name:  {{ template "als-oracle-pathfinder.fullname" . }}-db
       volumes:
-      - name: {{ template "als-oracle-pathfinder-chart.fullname" . }}-tls
+      - name: {{ template "als-oracle-pathfinder.fullname" . }}-tls
         secret:
-          secretName: {{ template "als-oracle-pathfinder-chart.fullname" . }}-tls
+          secretName: {{ template "als-oracle-pathfinder.fullname" . }}-tls
           defaultMode: 511
       imagePullSecrets:
       - name: {{ .Values.image.imagePullSecrets.name }}

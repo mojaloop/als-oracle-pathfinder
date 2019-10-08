@@ -4,7 +4,7 @@
 
 image:
   repository: casablanca-casa-docker-release.jfrog.io/als-oracle-pathfinder
-  tag: 10.1.4
+  tag: 10.4.1
   pullPolicy: Always
   imagePullSecrets:
     name: dock-casa-secret
@@ -12,6 +12,14 @@ image:
 service:
   type: ClusterIP
   port: 80
+
+db:
+  protocol: 'mysql'
+  host: '$release_name-centralledger-mysql'
+  port: '3306'
+  user: 'central_ledger'
+  password: 'oyMxgZChuu'
+  schema: 'central_ledger'
 
 accountLookupDbSchema: 'account_lookup'
 
@@ -30,4 +38,4 @@ pathfinder:
     # Intermediate cert is optional, but will likely be required for mutual auth if
     # rejectUnauthorized is true, as Neustar's certificate doesn't seem to have been signed by any
     # certs in the Mozilla bundle, which is used by Node as default.
-    intermediate_cert_path: 'secrets/pathfinderintermediatecert.pem'
+    intermediate_cert_path: 'secrets/pathfinder_intermediate_cert.pem'

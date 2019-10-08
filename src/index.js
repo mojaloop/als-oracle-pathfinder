@@ -4,7 +4,7 @@ const util = require('util');
 const Logger = require('@mojaloop/central-services-shared').Logger;
 const Pathfinder = require('@lib/pathfinder');
 const Config = require('./config');
-const { CentralLedgerDatabase, ALSDatabase } = require('./db');
+const { CentralLedgerDatabase } = require('./db');
 const { createServer } = require('./server');
 
 // Wrap logger methods for pathfinder lib
@@ -24,9 +24,8 @@ const initialize = async () => {
 
     const centralLedgerDb = new CentralLedgerDatabase(config.db);
     const pathfinder = new Pathfinder(config.pathfinder);
-    const alsDb = new ALSDatabase(config.alsDb, config.serviceName);
 
-    const server = await createServer({ config, centralLedgerDb, pathfinder, alsDb });
+    const server = await createServer({ config, centralLedgerDb, pathfinder });
 
     if (server) {
         try {

@@ -13,7 +13,6 @@ const Pathfinder = require('../');
 const mockSocket = require('./_mocksocket');
 const Chance = require('chance');
 const dnsPacket = require('dns-packet');
-const consoleLogger = console.log.bind(console);
 const nullLogger = () => {};
 // Set l = consoleLogger to log output
 const l = nullLogger;

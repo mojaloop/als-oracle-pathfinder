@@ -562,17 +562,17 @@ workflows:
 #              ignore:
 #                - /feature*/
 #                - /bugfix*/
-      - vulnerability-check:
-          context: org-global
-          requires:
-            - setup
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore:
-                - /feature*/
-                - /bugfix*/
+#      - vulnerability-check:
+#          context: org-global
+#          requires:
+#            - setup
+#          filters:
+#            tags:
+#              only: /.*/
+#            branches:
+#              ignore:
+#                - /feature*/
+#                - /bugfix*/
       - audit-licenses:
           context: org-global
           requires:
@@ -626,7 +626,7 @@ workflows:
             #- test-integration
             #            - test-functional
             #            - test-spec
-            - vulnerability-check
+            #- vulnerability-check
             - audit-licenses
           filters:
             tags:
@@ -653,7 +653,7 @@ workflows:
             #- test-integration
             #            - test-functional
             #            - test-spec
-            - vulnerability-check
+            #- vulnerability-check
             - audit-licenses
           filters:
             tags:
@@ -670,7 +670,7 @@ workflows:
             #- test-integration
             #            - test-functional
             #            - test-spec
-            - vulnerability-check
+            #- vulnerability-check
             - audit-licenses
           filters:
             tags:

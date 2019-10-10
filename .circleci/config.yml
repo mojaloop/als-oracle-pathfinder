@@ -621,9 +621,9 @@ workflows:
           context: org-global
           requires:
             - setup
-            - test-unit
-            - test-coverage
-            - test-integration
+            #- test-unit
+            #- test-coverage
+            #- test-integration
             #            - test-functional
             #            - test-spec
             - vulnerability-check
@@ -648,9 +648,9 @@ workflows:
           context: org-global
           requires:
             - setup
-            - test-unit
-            - test-coverage
-            - test-integration
+            #- test-unit
+            #- test-coverage
+            #- test-integration
             #            - test-functional
             #            - test-spec
             - vulnerability-check
@@ -665,9 +665,9 @@ workflows:
           context: org-global
           requires:
             - setup
-            - test-unit
-            - test-coverage
-            - test-integration
+            #- test-unit
+            #- test-coverage
+            #- test-integration
             #            - test-functional
             #            - test-spec
             - vulnerability-check

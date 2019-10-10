@@ -35,7 +35,9 @@
         "start": "node ./src/index",
         "test": "ava ./test ./src/lib/pathfinder/tests/",
         "test:api": "ava ./test",
-        "test:pathfinder": "ava ./src/lib/pathfinder/tests/"
+        "test:pathfinder": "ava ./src/lib/pathfinder/tests/",
+        "audit:resolve": "SHELL=sh resolve-audit",
+        "audit:check": "SHELL=sh check-audit"
     },
     "generator-swaggerize": {
         "version": "4.1.0"

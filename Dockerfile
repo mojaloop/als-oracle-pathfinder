@@ -1,11 +1,9 @@
-FROM node:8.11.3-alpine
+FROM node:8.12.0-alpine
 
-WORKDIR /app/src
+WORKDIR /opt/als-oracle-pathfinder
 
-CMD ["node", "./index.js"]
-
-COPY ./package.json ./package-lock.json /app/
-COPY ./src/lib/pathfinder/package.json ./src/lib/pathfinder/package-lock.json /app/src/lib/pathfinder/
+COPY ./src /opt/als-oracle-pathfinder/src
+COPY ./package.json ./package-lock.json /opt/als-oracle-pathfinder/
 RUN npm install --production
 
-COPY ./src /app/src/
+CMD ["node", "/opt/als-oracle-pathfinder/src/index.js"]

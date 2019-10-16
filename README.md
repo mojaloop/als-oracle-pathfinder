@@ -6,6 +6,8 @@ Code is based on the Mojaloop [ALS Oracle Template](https://github.com/mojaloop/
 Notes: 
 * You need to supply your own PathFinder TLS keys via a k8s Secret for this service to work properly.
 For more information check the `volumeMounts` property of `deployment.yaml` of the [mojaloop/helm](https://github.com/mojaloop/helm) repository.
+The paths to these keys are defined in the `src/config.js` file under the property `secrets`.
+
 * In order to execute the PathFinder tests, you'll need to supply the secrets in
     ```
         ./src/lib/pathfinder/secrets_test

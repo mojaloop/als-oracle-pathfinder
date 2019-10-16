@@ -46,11 +46,11 @@ const defaultConf = {
     },
     secrets: {
         // Our secret key
-        key: process.env.PATHFINDER_CLIENT_KEY_FILEPATH, // "../secrets/clientkey.pem",
+        key: process.env.PATHFINDER_CLIENT_KEY_FILEPATH,
         // The cert we'll use to identify ourselves to the pathfinder service
-        cert: process.env.PATHFINDER_CLIENT_CERT_FILEPATH, // "../secrets/clientcert.pem",
+        cert: process.env.PATHFINDER_CLIENT_CERT_FILEPATH,
         // Pathfinder's cert, we'll use this to authenticate pathfinder.
-        ca: process.env.PATHFINDER_CERT_FILEPATH, // "../secrets/pathfindercert.pem"
+        ca: process.env.PATHFINDER_CERT_FILEPATH,
         // Pathfinder's certificate chain, including intermediate certificates
         chain: process.env.PATHFINDER_INTERMEDIATE_CHAIN
     },

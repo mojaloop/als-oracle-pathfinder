@@ -5,7 +5,7 @@ WORKDIR /opt/als-oracle-pathfinder
 RUN apk update && apk add bash mysql-client
 
 COPY ./src /opt/als-oracle-pathfinder/src
-COPY ./package.json ./package-lock.json ./init.sql /opt/als-oracle-pathfinder/
+COPY ./package.json ./package-lock.json ./init-account-lookup.sql ./init-central-ledger.sql /opt/als-oracle-pathfinder/
 
 RUN npm install --production
 

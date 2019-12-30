@@ -14,16 +14,9 @@ const defaultConf = {
     server: {
         port: process.env.SERVER_PORT
     },
-    alsDb: {
-        host: process.env.DB_HOST,
-        database: process.env.DB_NAME_ACCOUNT_LOOKUP,
-        user: process.env.DB_USER,
-        port: process.env.DB_PORT,
-        password: process.env.DB_PASSWORD
-    },
     db: {
         host: process.env.DB_HOST,
-        database: process.env.DB_NAME_CENTRAL_LEDGER,
+        database: process.env.DB_NAME,
         user: process.env.DB_USER,
         port: process.env.DB_PORT,
         password: process.env.DB_PASSWORD

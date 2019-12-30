@@ -38,3 +38,13 @@ CREATE TABLE IF NOT EXISTS participantMno (
     CONSTRAINT participantmno_mobilecountrycode_mobilenetworkcode_unique
         UNIQUE (mobileCountryCode, mobileNetworkCode)
 );
+
+UPDATE oracleEndpoint oe SET oe.isActive=0, oe.isDefault=0 WHERE oe.createdBy='ALS Pathfinder Oracle';
+
+INSERT INTO oracleEndpoint(partyIdTypeId, endpointTypeId, value, createdBy, isDefault)
+VALUES (
+    (SELECT partyIdTypeId FROM partyIdType WHERE name = 'MSISDN'),
+    (SELECT endpointTypeId FROM endpointType WHERE type = 'URL'),
+    @service_name,
+    'ALS Pathfinder Oracle', 1)
+ON DUPLICATE KEY UPDATE value = @service_name;

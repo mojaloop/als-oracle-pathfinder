@@ -2,7 +2,10 @@ FROM node:8.12.0-alpine
 
 WORKDIR /opt/als-oracle-pathfinder
 
-RUN apk update && apk add bash mysql-client
+RUN apk add --no-cache -t build-dependencies git make gcc g++ python libtool autoconf automake bash mysql-client \
+    && cd $(npm root -g)/npm \
+    && npm config set unsafe-perm true \
+    && npm install -g node-gyp
 
 COPY ./src /opt/als-oracle-pathfinder/src
 COPY ./package.json ./package-lock.json ./init-account-lookup.sql ./init-central-ledger.sql /opt/als-oracle-pathfinder/

@@ -1,4 +1,9 @@
 # als-oracle-pathfinder
+[![Git Commit](https://img.shields.io/github/last-commit/mojaloop/als-oracle-pathfinder.svg?style=flat)](https://github.com/mojaloop/als-oracle-pathfinder/commits/master)
+[![Git Releases](https://img.shields.io/github/release/mojaloop/als-oracle-pathfinder.svg?style=flat)](https://github.com/mojaloop/als-oracle-pathfinder/releases)
+[![Docker pulls](https://img.shields.io/docker/pulls/mojaloop/als-oracle-pathfinder.svg?style=flat)](https://hub.docker.com/r/mojaloop/als-oracle-pathfinder)
+[![CircleCI](https://circleci.com/gh/mojaloop/als-oracle-pathfinder.svg?style=svg)](https://circleci.com/gh/mojaloop/als-oracle-pathfinder)
+
 An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs. 
 
 Code is based on the Mojaloop [ALS Oracle Template](https://github.com/mojaloop/als-oracle-template).

@@ -3,7 +3,7 @@
 const Hapi = require('@hapi/hapi');
 const HapiOpenAPI = require('hapi-openapi');
 const Path = require('path');
-const Logger = require('@mojaloop/central-services-shared').Logger;
+const Logger = require('@mojaloop/central-services-logger');
 
 const openAPIOptions = {
     api: Path.resolve(__dirname, './swagger.json'),

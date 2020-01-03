@@ -16,6 +16,7 @@
         "@hapi/boom": "^7.1.1",
         "@hapi/hapi": "^17.0.0",
         "@lib/pathfinder": "file:src/lib/pathfinder",
+        "@mojaloop/central-services-logger": "8.6.0",
         "@mojaloop/central-services-shared": "8.7.1",
         "@mojaloop/forensic-logging-client": "8.3.0",
         "dotenv": "^8.0.0",

@@ -1,7 +1,7 @@
 'use strict';
 
 const util = require('util');
-const Logger = require('@mojaloop/central-services-shared').Logger;
+const Logger = require('@mojaloop/central-services-logger');
 const Pathfinder = require('@lib/pathfinder');
 const Config = require('./config');
 const { CentralLedgerDatabase } = require('./db');

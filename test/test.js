@@ -11,7 +11,7 @@ const config = require(path.resolve(root, 'src/config'));
 // *** Some setup ***
 
 // Shut the logger up
-const Logger = require('@mojaloop/central-services-shared').Logger;
+const Logger = require('@mojaloop/central-services-logger');
 Logger.transports.forEach(t => t.silent = true);
 
 const headers = {

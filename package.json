@@ -20,7 +20,7 @@
         "@mojaloop/forensic-logging-client": "8.3.0",
         "dotenv": "^8.0.0",
         "hapi-openapi": "^1.0.0",
-        "knex": "^0.16.5",
+        "knex": "^0.19.5",
         "mysql2": "^1.6.5"
     },
     "devDependencies": {

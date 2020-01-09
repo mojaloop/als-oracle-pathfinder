@@ -31,6 +31,6 @@ INSERT INTO oracleEndpoint(partyIdTypeId, endpointTypeId, value, createdBy, isDe
 VALUES (
     (SELECT partyIdTypeId FROM partyIdType WHERE name = 'MSISDN'),
     (SELECT endpointTypeId FROM endpointType WHERE type = 'URL'),
-    @service_name,
+    CONCAT('http://', @service_name),
     'ALS Pathfinder Oracle', 1)
 ON DUPLICATE KEY UPDATE value = @service_name;

@@ -1,7 +1,7 @@
 {
     "name": "als-oracle-pathfinder",
     "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
-    "version": "8.7.1",
+    "version": "9.2.0",
     "author": "Matt Kingston <matt.kingston@modusbox.com>",
     "contributors": [],
     "repository": {
@@ -14,7 +14,7 @@
     },
     "dependencies": {
         "@hapi/boom": "^7.1.1",
-        "@hapi/hapi": "^17.0.0",
+        "@hapi/hapi": "^19.1.1",
         "@lib/pathfinder": "file:src/lib/pathfinder",
         "@mojaloop/central-services-logger": "8.6.0",
         "@mojaloop/central-services-shared": "8.7.1",
@@ -27,6 +27,7 @@
     "devDependencies": {
         "ava": "^1.4.1",
         "eslint": "5.6.1",
+        "npm-audit-resolver": "2.2.0",
         "swagmock": "1.0.0"
     },
     "scripts": {

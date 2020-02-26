@@ -1,0 +1,286 @@
+{
+  "decisions": {
+    "1468|@hapi/hapi>@hapi/accept>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707820426
+    },
+    "1468|@hapi/hapi>@hapi/ammo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707820426
+    },
+    "1468|@hapi/hapi>@hapi/call>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707820426
+    },
+    "1474|@hapi/hapi>@hapi/ammo": {
+      "decision": "fix",
+      "madeAt": 1582707820426
+    },
+    "1475|@hapi/hapi>@hapi/accept": {
+      "decision": "fix",
+      "madeAt": 1582707820426
+    },
+    "1476|@hapi/hapi>@hapi/subtext": {
+      "decision": "fix",
+      "madeAt": 1582707820426
+    },
+    "1480|@hapi/hapi>@hapi/subtext": {
+      "decision": "fix",
+      "madeAt": 1582707820426
+    },
+    "1482|@hapi/hapi": {
+      "decision": "fix",
+      "madeAt": 1582707820426
+    },
+    "1468|@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991657
+    },
+    "1468|@hapi/hapi>@hapi/accept>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991657
+    },
+    "1468|@hapi/hapi>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991657
+    },
+    "1468|@hapi/hapi>@hapi/bounce>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991657
+    },
+    "1468|@hapi/hapi>@hapi/somever>@hapi/bounce>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991657
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/bounce>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991657
+    },
+    "1468|@hapi/hapi>@hapi/call>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/catbox>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/catbox-memory>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/heavy>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/cryptiles>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/iron>@hapi/cryptiles>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/iron>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/content>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/pez>@hapi/content>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/pez>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/wreck>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox-memory>@hapi/boom>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/bounce>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/somever>@hapi/bounce>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/bounce>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/catbox>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/catbox>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/catbox>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/catbox>@hapi/podium>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox>@hapi/podium>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/podium>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/heavy>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/shot>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/joi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/topo>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/catbox>@hapi/podium>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox>@hapi/podium>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/podium>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/catbox>@hapi/podium>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox>@hapi/podium>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/podium>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/heavy>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/heavy>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/mimos>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/shot>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/shot>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/somever>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/iron>@hapi/b64>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/pez>@hapi/b64>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/iron>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/statehood>@hapi/joi>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/pez>@hapi/nigel>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/pez>@hapi/nigel>@hapi/vise>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/wreck>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@mojaloop/central-services-shared>@hapi/catbox-memory>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582707991658
+    },
+    "1468|@hapi/hapi>@hapi/subtext>@hapi/pez>@hapi/hoek": {
+      "decision": "fix",
+      "madeAt": 1582708033478
+    }
+  },
+  "rules": {},
+  "version": 1
+}

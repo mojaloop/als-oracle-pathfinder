@@ -54,6 +54,31 @@ class CentralLedgerDatabase extends Database {
 
         return rows;
     }
+
+    /**
+     * Upserts a participant and associated mobile country code and mobile network code
+     *
+     * @returns {promise} - name of the participant
+     */
+    async putParticipantInfo(fspId, mobileCountryCode, mobileNetworkCode) {
+        // knex has no merge/upsert. In this function we simulate a merge/upsert by inserting,
+        // and if there is an error, updating.
+        // it appears to be incoming (who knows when it'll land):
+        // https://github.com/knex/knex/issues/3186
+        // https://github.com/knex/knex/pull/3763
+        const participantId = await this.client('participant')
+            .select('participantId')
+            .where({ name: fspId });
+        const rowData = { participantId, mobileCountryCode, mobileNetworkCode };
+        try {
+            await this.client('participantMno').insert(rowData)
+        } catch (err) {
+            // Last write wins- that's fine
+            await this.client('participantMno')
+                .where({ mobileCountryCode, mobileNetworkCode })
+                .update({ participantId });
+        }
+    }
 }
 
 module.exports = {

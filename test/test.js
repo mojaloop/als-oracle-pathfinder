@@ -248,5 +248,21 @@ test('test put parties by type and id with MSISDN not resolved by pathfinder', a
         payload: { fspId: 'blah', currency: 'blah' }
     });
     t.is(response.statusCode, 404);
+    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/Party not found/));
+});
+
+test('test put parties by type and id with fspId not available in DB', async t => {
+    const pfResult = { mcc: '123', mnc: '456' };
+    t.context.server.app.pf.query = () => (pfResult);
+    t.context.server.app.db.putParticipantInfo = (fspId, mcc, mnc) => {
+        throw new Error('Could not find participant');
+    };
+    const response = await t.context.server.inject({
+        method: 'put',
+        headers,
+        url: `/participants/MSISDN/123456`,
+        payload: { fspId: 'blah', currency: 'blah' }
+    });
+    t.is(response.statusCode, 404);
     t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/FSP not found/));
 });

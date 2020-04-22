@@ -44,6 +44,7 @@ module.exports = {
 
         return h.response({ partyList: parties.filter(filterF) }).code(200);
     },
+
     /**
      * summary: Upsert participant information
      * description: The PUT /participants/{Type}/{ID} is used to update information in the server regarding the provided identity, defined by {Type} and {ID} (for example, PUT /participants/MSISDN/123456789).
@@ -72,10 +73,17 @@ module.exports = {
         const { mcc, mnc } = await req.server.app.pf.query(ID);
         req.server.log(['info'], `PUT /participants/${Type}/${ID} [ mcc, mnc ] = [ ${mcc}, ${mnc} ]`);
         if (mcc === undefined || mnc === undefined) {
-            return responses.FSP_NOT_FOUND();
+            return responses.PARTY_NOT_FOUND();
         }
 
-        await req.server.app.db.putParticipantInfo(req.payload.fspId, mcc, mnc);
+        try {
+            await req.server.app.db.putParticipantInfo(req.payload.fspId, mcc, mnc);
+        } catch (err) {
+            if (err.message.match(/Could not find participant/)) {
+                return responses.FSP_NOT_FOUND();
+            }
+            throw err;
+        }
         return h.response().code(200);
     },
     /**

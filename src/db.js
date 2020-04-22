@@ -66,9 +66,13 @@ class CentralLedgerDatabase extends Database {
         // it appears to be incoming (who knows when it'll land):
         // https://github.com/knex/knex/issues/3186
         // https://github.com/knex/knex/pull/3763
-        const participantId = await this.client('participant')
+        const res = await this.client('participant')
             .select('participantId')
             .where({ name: fspId });
+        if (res.length === 0) {
+            throw new Error(`Could not find participant ${fspId}`)
+        }
+        const { participantId } = res[0];
         const rowData = { participantId, mobileCountryCode, mobileNetworkCode };
         try {
             await this.client('participantMno').insert(rowData)

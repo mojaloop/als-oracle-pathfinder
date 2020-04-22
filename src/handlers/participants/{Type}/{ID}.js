@@ -55,7 +55,7 @@ module.exports = {
         const { Type, ID } = req.params;
         if (Type != 'MSISDN') {
             // TODO: is this appropriate? Should we return a more descriptive error?
-            return Boom.notImplemented();
+            return responses.ID_TYPE_NOT_SUPPORTED();
         }
         if (!e164(ID)) {
             // TODO: validate e164 in the swagger
@@ -66,23 +66,16 @@ module.exports = {
         // containing `partySubIdOrType` as there's no implementation of that here.
         if (req.payload.partySubIdOrType) {
             // TODO: is this appropriate? Should we return a more descriptive error?
-            return Boom.notImplemented();
+            return responses.SUBIDORTYPE_NOT_SUPPORTED();
         }
 
         const { mcc, mnc } = await req.server.app.pf.query(ID);
         req.server.log(['info'], `PUT /participants/${Type}/${ID} [ mcc, mnc ] = [ ${mcc}, ${mnc} ]`);
         if (mcc === undefined || mnc === undefined) {
-            // TODO:
-            // const response = {
-            //     errorInformation: {
-            //         errorCode:
-            //         errorDescription:
-            //     }
-            // }
-            return h.response().code(404);
+            return responses.FSP_NOT_FOUND();
         }
 
-        await db.putParticipantInfo(fspId, mcc, mnc);
+        await req.server.app.db.putParticipantInfo(req.payload.fspId, mcc, mnc);
         return h.response().code(200);
     },
     /**

@@ -43,12 +43,12 @@ class MockKnexQuery extends Promise {
 
 const fakeKnex = ({
     queryResult,
-    query = new MockKnexQuery((res, rej) => res(queryResult)),
+    query = new MockKnexQuery((resolve) => resolve(queryResult)),
     client = sinon.fake.returns(query)
 } = {}) => ({
     client,
     query,
-})
+});
 
 test.beforeEach(async t => {
     const client = sinon.fake();
@@ -132,7 +132,7 @@ test('putParticipantInfo correctly updates when row is already present', async t
     t.is(queryEngine.where.callCount, 2);
     t.assert(queryEngine.update.calledOnce);
     t.deepEqual(queryEngine.where.secondCall.args[0], { mobileCountryCode, mobileNetworkCode, });
-    t.deepEqual(queryEngine.update.firstCall.args[0], { participantId })
+    t.deepEqual(queryEngine.update.firstCall.args[0], { participantId });
 });
 
 test('getParticipantInfoFromMccMnc throws when the db throws', async t => {
@@ -143,7 +143,7 @@ test('getParticipantInfoFromMccMnc throws when the db throws', async t => {
 
 test('getParticipantInfoFromMccMnc returns results', async t => {
     const { db } = t.context;
-    const queryResult = [123]
+    const queryResult = [123];
     db.client = fakeKnex({ queryResult }).client;
     const result = await db.getParticipantInfoFromMccMnc(123, 456);
     t.deepEqual(result, queryResult);

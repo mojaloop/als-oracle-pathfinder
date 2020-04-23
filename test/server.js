@@ -86,7 +86,7 @@ test('test get participants by type and id, invalid E164', async t => {
     });
 });
 
-test('test get parties by type and id, no currency', async t => {
+test('test get participants by type and id, no currency', async t => {
     const expectedResult = { partyList: [{ fspId: 'test', currency: 'TEST' }] };
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
@@ -107,7 +107,7 @@ test('test get parties by type and id, no currency', async t => {
     t.deepEqual(JSON.parse(response.payload), expectedResult);
 });
 
-test('test get parties by type and id, currency query param positive response', async t => {
+test('test get participants by type and id, currency query param positive response', async t => {
     const expectedResult = { partyList: [{ fspId: 'test', currency: 'TEST' }] };
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
@@ -131,7 +131,7 @@ test('test get parties by type and id, currency query param positive response', 
     t.deepEqual(JSON.parse(response.payload), expectedResult);
 });
 
-test('test get parties by type and id, currency query param negative response', async t => {
+test('test get participants by type and id, currency query param negative response', async t => {
     const expectedResult = {
         statusCode: 404,
         error: 'Not Found',
@@ -156,7 +156,7 @@ test('test get parties by type and id, currency query param negative response', 
     t.deepEqual(JSON.parse(response.payload), expectedResult);
 });
 
-test('test get parties by type and id, mcc, mnc invalid', async t => {
+test('test get participants by type and id, mcc, mnc invalid', async t => {
     const expectedResult = {
         partyList: []
     };
@@ -176,7 +176,7 @@ test('test get parties by type and id, mcc, mnc invalid', async t => {
     t.deepEqual(JSON.parse(response.payload), expectedResult);
 });
 
-test('test put parties by type and id', async t => {
+test('test put participants by type and id', async t => {
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
     const payload = { fspId: 'blah', currency: 'blah' };
@@ -195,7 +195,7 @@ test('test put parties by type and id', async t => {
     t.assert(response.headers['content-length'] === 0);
 });
 
-test('test put parties by type and id with non-msisdn Type receives HTTP 501', async t => {
+test('test put participants by type and id with non-msisdn Type receives HTTP 501', async t => {
     const payload = { fspId: 'blah', currency: 'blah' };
     const response = await t.context.server.inject({
         method: 'put',
@@ -207,7 +207,7 @@ test('test put parties by type and id with non-msisdn Type receives HTTP 501', a
     t.is(response.statusCode, 501);
 });
 
-test('test put parties by type and id with partySubIdOrType in payload receives HTTP 501', async t => {
+test('test put participants by type and id with partySubIdOrType in payload receives HTTP 501', async t => {
     const payload = { fspId: 'blah', currency: 'blah', partySubIdOrType: 'haha' };
     const response = await t.context.server.inject({
         method: 'put',
@@ -219,7 +219,7 @@ test('test put parties by type and id with partySubIdOrType in payload receives 
     t.is(response.statusCode, 501);
 });
 
-test('test put parties by invalid MSISDN receives error response', async t => {
+test('test put participants by invalid MSISDN receives error response', async t => {
     const payload = { fspId: 'blah', currency: 'blah' };
     const response = await t.context.server.inject({
         method: 'put',
@@ -235,7 +235,7 @@ test('test put parties by invalid MSISDN receives error response', async t => {
     t.is(response.statusCode, 400);
 });
 
-test('test put parties by type and id with MSISDN not resolved by pathfinder', async t => {
+test('test put participants by type and id with MSISDN not resolved by pathfinder', async t => {
     t.context.server.app.pf.query = () => ({});
     t.context.server.app.db.putParticipantInfo = () => {
         throw new Error('DB should not be called');
@@ -250,7 +250,7 @@ test('test put parties by type and id with MSISDN not resolved by pathfinder', a
     t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/Party not found/));
 });
 
-test('test put parties by type and id with fspId not available in DB', async t => {
+test('test put participants by type and id with fspId not available in DB', async t => {
     const pfResult = { mcc: '123', mnc: '456' };
     t.context.server.app.pf.query = () => (pfResult);
     t.context.server.app.db = {

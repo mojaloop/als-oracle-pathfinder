@@ -26,14 +26,6 @@ class MockKnexQuery extends Promise {
         super((resolve, reject) => {
             return executor(resolve, reject);
         });
-        this.calls = {
-            select: [],
-            innerJoin: [],
-            where: [],
-            from: [],
-            insert: [],
-            update: [],
-        }
     }
 
     then(onFulfilled, onRejected) {
@@ -41,35 +33,12 @@ class MockKnexQuery extends Promise {
         return returnValue;
     }
 
-    select(...args) {
-        this.calls.select.push({ args });
-        return this;
-    }
-
-    innerJoin(...args) {
-        this.calls.innerJoin.push({ args });
-        return this;
-    }
-
-    where(...args) {
-        this.calls.where.push({ args });
-        return this;
-    }
-
-    from(...args) {
-        this.calls.from.push({ args });
-        return this;
-    }
-
-    insert(...args) {
-        this.calls.insert.push({ args });
-        return this;
-    }
-
-    update(...args) {
-        this.calls.update.push({ args });
-        return this;
-    }
+    select = sinon.fake.returns(this);
+    innerJoin = sinon.fake.returns(this);
+    where = sinon.fake.returns(this);
+    from = sinon.fake.returns(this);
+    insert = sinon.fake.returns(this);
+    update = sinon.fake.returns(this);
 }
 
 const fakeKnex = ({
@@ -136,8 +105,8 @@ test('putParticipantInfo inserts correct data to db', async t => {
     });
     db.client = client;
     await db.putParticipantInfo('blah', 123, 456);
-    t.is(query.calls.insert.length, 1);
-    t.deepEqual(query.calls.insert[0].args[0], expectedInsertData);
+    t.assert(query.insert.calledOnce);
+    t.deepEqual(query.insert.firstCall.args[0], expectedInsertData);
 });
 
 test('putParticipantInfo correctly updates when row is already present', async t => {
@@ -160,10 +129,10 @@ test('putParticipantInfo correctly updates when row is already present', async t
     await db.putParticipantInfo('blah', 123, 456);
     t.assert(queryEngine.insert.calledOnce);
     t.deepEqual(queryEngine.insert.firstCall.args[0], expectedInsertData);
-    t.is(queryEngine.calls.where.length, 2);
-    t.is(queryEngine.calls.update.length, 1);
-    t.deepEqual(queryEngine.calls.where[1].args[0], { mobileCountryCode, mobileNetworkCode, });
-    t.deepEqual(queryEngine.calls.update[0].args[0], { participantId })
+    t.is(queryEngine.where.callCount, 2);
+    t.assert(queryEngine.update.calledOnce);
+    t.deepEqual(queryEngine.where.secondCall.args[0], { mobileCountryCode, mobileNetworkCode, });
+    t.deepEqual(queryEngine.update.firstCall.args[0], { participantId })
 });
 
 test('getParticipantInfoFromMccMnc throws when the db throws', async t => {

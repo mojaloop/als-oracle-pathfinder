@@ -110,7 +110,7 @@ class CentralLedgerDatabase extends Database {
         const { participantId } = res[0];
         const rowData = { participantId, mobileCountryCode, mobileNetworkCode };
         try {
-            await this.client('participantMno').insert(rowData)
+            await this.client('participantMno').insert(rowData);
         } catch (err) {
             // Last write wins- that's fine
             await this.client('participantMno')

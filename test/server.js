@@ -177,7 +177,6 @@ test('test get parties by type and id, mcc, mnc invalid', async t => {
 });
 
 test('test put parties by type and id', async t => {
-    const expectedResult = {};
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
     const payload = { fspId: 'blah', currency: 'blah' };
@@ -204,7 +203,7 @@ test('test put parties by type and id with non-msisdn Type receives HTTP 501', a
         url: '/participants/BUSINESS/blah',
         payload
     });
-    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/MSISDN/))
+    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/MSISDN/));
     t.is(response.statusCode, 501);
 });
 
@@ -216,7 +215,7 @@ test('test put parties by type and id with partySubIdOrType in payload receives 
         url: '/participants/MSISDN/12345',
         payload
     });
-    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/partySubIdOrType/))
+    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/partySubIdOrType/));
     t.is(response.statusCode, 501);
 });
 
@@ -238,13 +237,13 @@ test('test put parties by invalid MSISDN receives error response', async t => {
 
 test('test put parties by type and id with MSISDN not resolved by pathfinder', async t => {
     t.context.server.app.pf.query = () => ({});
-    t.context.server.app.db.putParticipantInfo = (fspId, mcc, mnc) => {
+    t.context.server.app.db.putParticipantInfo = () => {
         throw new Error('DB should not be called');
     };
     const response = await t.context.server.inject({
         method: 'put',
         headers,
-        url: `/participants/MSISDN/123456`,
+        url: '/participants/MSISDN/123456',
         payload: { fspId: 'blah', currency: 'blah' }
     });
     t.is(response.statusCode, 404);
@@ -255,7 +254,7 @@ test('test put parties by type and id with fspId not available in DB', async t =
     const pfResult = { mcc: '123', mnc: '456' };
     t.context.server.app.pf.query = () => (pfResult);
     t.context.server.app.db = {
-        putParticipantInfo: (fspId, mcc, mnc) => {
+        putParticipantInfo: () => {
             throw { code: 'PARTICIPANT_NOT_FOUND' };
         },
         errorIs: () => true,
@@ -264,8 +263,8 @@ test('test put parties by type and id with fspId not available in DB', async t =
     const response = await t.context.server.inject({
         method: 'put',
         headers,
-        url: `/participants/MSISDN/123456`,
-        payload: { fspId: 'blah', currency: 'blah' }
+        url: '/participants/MSISDN/123456',
+        payload: { fspId: 'blah', currency: 'blah' },
     });
     t.is(response.statusCode, 404);
     t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/FSP not found/));

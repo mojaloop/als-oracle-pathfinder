@@ -55,7 +55,7 @@ module.exports = {
     put: async function ParticipantsByTypeAndIDPut(req, h) {
         const { Type, ID } = req.params;
         const { db, pf } = req.server.app;
-        if (Type != 'MSISDN') {
+        if (Type !== 'MSISDN') {
             // TODO: is this appropriate? Should we return a more descriptive error?
             return responses.ID_TYPE_NOT_SUPPORTED();
         }
@@ -68,7 +68,7 @@ module.exports = {
         // containing `partySubIdOrType` as there's no implementation of that here.
         if (req.payload.partySubIdOrType) {
             // TODO: is this appropriate? Should we return a more descriptive error?
-            return responses.SUBIDORTYPE_NOT_SUPPORTED();
+            return responses.SUB_ID_OR_TYPE_NOT_SUPPORTED();
         }
 
         const { mcc, mnc } = await pf.query(ID);

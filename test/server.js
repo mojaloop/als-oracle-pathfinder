@@ -257,7 +257,7 @@ test('test put participants by type and id with fspId not available in DB', asyn
         putParticipantInfo: () => {
             throw { code: 'PARTICIPANT_NOT_FOUND' };
         },
-        errorIs: () => true,
+        verifyErrorType: () => true,
         ErrorCodes: {}
     };
     const response = await t.context.server.inject({

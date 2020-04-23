@@ -65,7 +65,7 @@ class CentralLedgerDatabase extends Database {
      *
      * @returns boolean - error is of the type supplied
      */
-    errorIs(err, code) {
+    verifyErrorType(err, code) {
         return code in this.ErrorCodes && err.code === code;
     }
 

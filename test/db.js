@@ -84,7 +84,7 @@ test('putParticipantInfo throws when the relevant FSP is not present', async t =
     const { db } = t.context;
     db.client = fakeKnex({ queryResult: [] }).client;
     const err = await t.throwsAsync(db.putParticipantInfo('blah'));
-    t.assert(db.errorIs(err, db.ErrorCodes.PARTICIPANT_NOT_FOUND));
+    t.assert(db.verifyErrorType(err, db.ErrorCodes.PARTICIPANT_NOT_FOUND));
 });
 
 test('putParticipantInfo throws when the db throws', async t => {

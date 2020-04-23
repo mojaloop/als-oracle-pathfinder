@@ -80,7 +80,7 @@ module.exports = {
         try {
             await db.putParticipantInfo(req.payload.fspId, mcc, mnc);
         } catch (err) {
-            if (db.errorIs(err, db.ErrorCodes.PARTICIPANT_NOT_FOUND)) {
+            if (db.verifyErrorType(err, db.ErrorCodes.PARTICIPANT_NOT_FOUND)) {
                 return responses.FSP_NOT_FOUND();
             }
             throw err;

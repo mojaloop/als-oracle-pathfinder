@@ -54,6 +54,7 @@ module.exports = {
      */
     put: async function ParticipantsByTypeAndIDPut(req, h) {
         const { Type, ID } = req.params;
+        const { db, pf } = req.server.app;
         if (Type != 'MSISDN') {
             // TODO: is this appropriate? Should we return a more descriptive error?
             return responses.ID_TYPE_NOT_SUPPORTED();
@@ -70,16 +71,16 @@ module.exports = {
             return responses.SUBIDORTYPE_NOT_SUPPORTED();
         }
 
-        const { mcc, mnc } = await req.server.app.pf.query(ID);
+        const { mcc, mnc } = await pf.query(ID);
         req.server.log(['info'], `PUT /participants/${Type}/${ID} [ mcc, mnc ] = [ ${mcc}, ${mnc} ]`);
         if (mcc === undefined || mnc === undefined) {
             return responses.PARTY_NOT_FOUND();
         }
 
         try {
-            await req.server.app.db.putParticipantInfo(req.payload.fspId, mcc, mnc);
+            await db.putParticipantInfo(req.payload.fspId, mcc, mnc);
         } catch (err) {
-            if (err.message.match(/Could not find participant/)) {
+            if (db.errorIs(err, db.ErrorCodes.PARTICIPANT_NOT_FOUND)) {
                 return responses.FSP_NOT_FOUND();
             }
             throw err;

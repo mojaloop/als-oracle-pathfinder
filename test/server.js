@@ -254,8 +254,12 @@ test('test put parties by type and id with MSISDN not resolved by pathfinder', a
 test('test put parties by type and id with fspId not available in DB', async t => {
     const pfResult = { mcc: '123', mnc: '456' };
     t.context.server.app.pf.query = () => (pfResult);
-    t.context.server.app.db.putParticipantInfo = (fspId, mcc, mnc) => {
-        throw new Error('Could not find participant');
+    t.context.server.app.db = {
+        putParticipantInfo: (fspId, mcc, mnc) => {
+            throw { code: 'PARTICIPANT_NOT_FOUND' };
+        },
+        errorIs: () => true,
+        ErrorCodes: {}
     };
     const response = await t.context.server.inject({
         method: 'put',

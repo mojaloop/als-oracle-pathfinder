@@ -5,18 +5,16 @@ const HapiOpenAPI = require('hapi-openapi');
 const Path = require('path');
 const Logger = require('@mojaloop/central-services-logger');
 
-const openAPIOptions = {
-    api: Path.resolve(__dirname, './swagger.json'),
-    handlers: Path.resolve(__dirname, './handlers')
-};
-
 module.exports.createServer = async function({ config, centralLedgerDb, pathfinder }) {
     try {
         const server = new Hapi.Server(config.server);
         await server.register([
             {
                 plugin: HapiOpenAPI,
-                options: openAPIOptions
+                options: {
+                    api: Path.resolve(__dirname, './swagger.json'),
+                    handlers: Path.resolve(__dirname, './handlers')
+                }
             },
             {
                 plugin: require('./utils/logger-plugin')

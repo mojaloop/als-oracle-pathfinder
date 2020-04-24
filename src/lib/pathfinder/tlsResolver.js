@@ -125,8 +125,15 @@ module.exports = class TlsResolver {
             tempSocket.on('error', err => {
                 // this will only reject the promise if it has not already
                 // fulfilled, i.e. if we're not already connected/failed
-                reject(err);
-                this._handleSocketError(err);
+                if (this.socket) {
+                    this._handleSocketError(err);
+                }
+                else {
+                    this.logger.error(
+                        fmt('Failed to connect to pathfinder host at %s:%s',
+                            this.config.tls.host, this.config.tls.port));
+                    reject(err);
+                }
             });
 
             tempSocket.on('data', this._handleSocketData.bind(this));

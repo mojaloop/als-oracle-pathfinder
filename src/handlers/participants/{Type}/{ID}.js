@@ -44,15 +44,48 @@ module.exports = {
 
         return h.response({ partyList: parties.filter(filterF) }).code(200);
     },
+
     /**
-     * summary: Return participant information
+     * summary: Upsert participant information
      * description: The PUT /participants/{Type}/{ID} is used to update information in the server regarding the provided identity, defined by {Type} and {ID} (for example, PUT /participants/MSISDN/123456789).
      * parameters: Type, ID, content-type, date, fspiop-source, body, accept, x-forwarded-for, fspiop-destination, fspiop-encryption, fspiop-signature, fspiop-uri, fspiop-http-method, content-length
      * produces: application/json
      * responses: 200, 400, 401, 403, 404, 405, 406, 501, 503
      */
-    put: function ParticipantsByTypeAndIDPut() {
-        return Boom.notImplemented();
+    put: async function ParticipantsByTypeAndIDPut(req, h) {
+        const { Type, ID } = req.params;
+        const { db, pf } = req.server.app;
+        if (Type !== 'MSISDN') {
+            // TODO: is this appropriate? Should we return a more descriptive error?
+            return responses.ID_TYPE_NOT_SUPPORTED();
+        }
+        if (!e164(ID)) {
+            // TODO: validate e164 in the swagger
+            return responses.E164_INVALID();
+        }
+        // Payload looks like { fspId, currency[, partySubIdOrType] }. We ignore `currency` as
+        // that's (1) required but (2) defined by the accounts the fsp holds. We reject requests
+        // containing `partySubIdOrType` as there's no implementation of that here.
+        if (req.payload.partySubIdOrType) {
+            // TODO: is this appropriate? Should we return a more descriptive error?
+            return responses.SUB_ID_OR_TYPE_NOT_SUPPORTED();
+        }
+
+        const { mcc, mnc } = await pf.query(ID);
+        req.server.log(['info'], `PUT /participants/${Type}/${ID} [ mcc, mnc ] = [ ${mcc}, ${mnc} ]`);
+        if (mcc === undefined || mnc === undefined) {
+            return responses.PARTY_NOT_FOUND();
+        }
+
+        try {
+            await db.putParticipantInfo(req.payload.fspId, mcc, mnc);
+        } catch (err) {
+            if (db.verifyErrorType(err, db.ErrorCodes.PARTICIPANT_NOT_FOUND)) {
+                return responses.FSP_NOT_FOUND();
+            }
+            throw err;
+        }
+        return h.response().code(200);
     },
     /**
      * summary: Create participant information

@@ -86,7 +86,7 @@ test('test get participants by type and id, invalid E164', async t => {
     });
 });
 
-test('test get parties by type and id, no currency', async t => {
+test('test get participants by type and id, no currency', async t => {
     const expectedResult = { partyList: [{ fspId: 'test', currency: 'TEST' }] };
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
@@ -107,7 +107,7 @@ test('test get parties by type and id, no currency', async t => {
     t.deepEqual(JSON.parse(response.payload), expectedResult);
 });
 
-test('test get parties by type and id, currency query param positive response', async t => {
+test('test get participants by type and id, currency query param positive response', async t => {
     const expectedResult = { partyList: [{ fspId: 'test', currency: 'TEST' }] };
     const msisdn = '1230456';
     const pfResult = { mcc: '123', mnc: '456' };
@@ -131,7 +131,7 @@ test('test get parties by type and id, currency query param positive response', 
     t.deepEqual(JSON.parse(response.payload), expectedResult);
 });
 
-test('test get parties by type and id, currency query param negative response', async t => {
+test('test get participants by type and id, currency query param negative response', async t => {
     const expectedResult = {
         statusCode: 404,
         error: 'Not Found',
@@ -156,7 +156,7 @@ test('test get parties by type and id, currency query param negative response', 
     t.deepEqual(JSON.parse(response.payload), expectedResult);
 });
 
-test('test get parties by type and id, mcc, mnc invalid', async t => {
+test('test get participants by type and id, mcc, mnc invalid', async t => {
     const expectedResult = {
         partyList: []
     };
@@ -174,4 +174,98 @@ test('test get parties by type and id, mcc, mnc invalid', async t => {
     });
     t.is(response.statusCode, 200);
     t.deepEqual(JSON.parse(response.payload), expectedResult);
+});
+
+test('test put participants by type and id', async t => {
+    const msisdn = '1230456';
+    const pfResult = { mcc: '123', mnc: '456' };
+    const payload = { fspId: 'blah', currency: 'blah' };
+    t.context.server.app.pf.query = () => (pfResult);
+    t.context.server.app.db.putParticipantInfo = (fspId, mcc, mnc) => {
+        t.deepEqual(fspId, payload.fspId);
+        t.deepEqual(pfResult, { mcc, mnc });
+    };
+    const response = await t.context.server.inject({
+        method: 'put',
+        headers,
+        url: `/participants/MSISDN/${msisdn}`,
+        payload
+    });
+    t.is(response.statusCode, 200);
+    t.assert(response.headers['content-length'] === 0);
+});
+
+test('test put participants by type and id with non-msisdn Type receives HTTP 501', async t => {
+    const payload = { fspId: 'blah', currency: 'blah' };
+    const response = await t.context.server.inject({
+        method: 'put',
+        headers,
+        url: '/participants/BUSINESS/blah',
+        payload
+    });
+    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/MSISDN/));
+    t.is(response.statusCode, 501);
+});
+
+test('test put participants by type and id with partySubIdOrType in payload receives HTTP 501', async t => {
+    const payload = { fspId: 'blah', currency: 'blah', partySubIdOrType: 'haha' };
+    const response = await t.context.server.inject({
+        method: 'put',
+        headers,
+        url: '/participants/MSISDN/12345',
+        payload
+    });
+    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/partySubIdOrType/));
+    t.is(response.statusCode, 501);
+});
+
+test('test put participants by invalid MSISDN receives error response', async t => {
+    const payload = { fspId: 'blah', currency: 'blah' };
+    const response = await t.context.server.inject({
+        method: 'put',
+        headers,
+        url: '/participants/MSISDN/blah',
+        payload
+    });
+    t.deepEqual(JSON.parse(response.payload), {
+        statusCode: 400,
+        error: 'Bad Request',
+        message: { errorInformation: { errorDescription: 'ID is not valid E164 number' }}
+    });
+    t.is(response.statusCode, 400);
+});
+
+test('test put participants by type and id with MSISDN not resolved by pathfinder', async t => {
+    t.context.server.app.pf.query = () => ({});
+    t.context.server.app.db.putParticipantInfo = () => {
+        throw new Error('DB should not be called');
+    };
+    const response = await t.context.server.inject({
+        method: 'put',
+        headers,
+        url: '/participants/MSISDN/123456',
+        payload: { fspId: 'blah', currency: 'blah' }
+    });
+    t.is(response.statusCode, 404);
+    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/Party not found/));
+});
+
+test('test put participants by type and id with fspId not available in DB', async t => {
+    const pfResult = { mcc: '123', mnc: '456' };
+    t.context.server.app.pf.query = () => (pfResult);
+    t.context.server.app.db = {
+        putParticipantInfo: () => {
+            throw { code: 'PARTICIPANT_NOT_FOUND' };
+        },
+        verifyErrorType: () => true,
+        ErrorCodes: {}
+    };
+    const response = await t.context.server.inject({
+        method: 'put',
+        headers,
+        url: '/participants/MSISDN/123456',
+        payload: { fspId: 'blah', currency: 'blah' },
+    });
+    t.is(response.statusCode, 404);
+    t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/FSP not found/));
 });

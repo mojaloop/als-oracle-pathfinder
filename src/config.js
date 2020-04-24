@@ -47,8 +47,7 @@ const defaultConf = {
         // Pathfinder's certificate chain, including intermediate certificates
         chain: process.env.PATHFINDER_INTERMEDIATE_CHAIN
     },
-    logLevel: process.env.LOG_LEVEL,
-    serviceName: process.env.ALS_SERVICE_NAME
+    logLevel: process.env.LOG_LEVEL
 };
 
 async function init(conf = defaultConf) {

@@ -1,7 +1,7 @@
 {
     "name": "als-oracle-pathfinder",
     "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
-    "version": "9.4.0",
+    "version": "10.2.0",
     "author": "Matt Kingston <matt.kingston@modusbox.com>",
     "contributors": [],
     "repository": {
@@ -25,7 +25,9 @@
     },
     "devDependencies": {
         "ava": "^3.7.1",
-        "eslint": "5.6.1"
+        "eslint": "5.6.1",
+        "npm-audit-resolver": "2.2.0",
+        "npm-check-updates": "6.0.1"
     },
     "scripts": {
         "build": "docker build -t als-oracle-pathfinder -f ./Dockerfile .",
@@ -34,8 +36,10 @@
         "start": "node --unhandled-rejections=strict ./src/index",
         "test": "ava ./test/**/*.js",
         "test:pathfinder": "ava ./src/lib/pathfinder/tests/",
-        "audit:resolve": "SHELL=sh resolve-audit",
-        "audit:check": "SHELL=sh check-audit"
+        "audit:resolve": "SHELL=sh resolve-audit --production",
+        "audit:check": "SHELL=sh check-audit --production",
+        "dep:check": "npx ncu -e 2",
+        "dep:update": "npx ncu -u"
     },
     "generator-swaggerize": {
         "version": "4.1.0"

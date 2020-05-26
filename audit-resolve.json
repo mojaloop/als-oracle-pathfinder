@@ -1,0 +1,21 @@
+{
+  "decisions": {
+    "1179|@mojaloop/central-services-shared>@mojaloop/event-sdk>grpc>node-pre-gyp>mkdirp>minimist": {
+      "decision": "ignore",
+      "madeAt": 1590127591071,
+      "expiresAt": 1592719585422
+    },
+    "1179|@mojaloop/central-services-shared>@mojaloop/event-sdk>grpc>node-pre-gyp>tar>mkdirp>minimist": {
+      "decision": "ignore",
+      "madeAt": 1590127591071,
+      "expiresAt": 1592719585422
+    },
+    "1179|@mojaloop/central-services-shared>@mojaloop/event-sdk>grpc>node-pre-gyp>rc>minimist": {
+      "decision": "ignore",
+      "madeAt": 1590127591071,
+      "expiresAt": 1592719585422
+    }
+  },
+  "rules": {},
+  "version": 1
+}

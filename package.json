@@ -17,9 +17,9 @@
         "@hapi/hapi": "18.4.1",
         "@lib/pathfinder": "file:src/lib/pathfinder",
         "@mojaloop/central-services-logger": "9.5.1",
-        "@mojaloop/central-services-shared": "9.5.5",
+        "@mojaloop/central-services-shared": "^11.1.2",
         "dotenv": "^8.0.0",
-        "hapi-openapi": "1.2.6",
+        "hapi-openapi": "^2.0.2",
         "knex": "^0.19.5",
         "mysql2": "^1.6.5"
     },

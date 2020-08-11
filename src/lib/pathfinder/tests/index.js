@@ -204,7 +204,7 @@ test('Test queries are rejected when the queue is full', async function(t) {
         `Minimum queue processing duration ${conf.queryTimeoutMs}ms. ` +
         `Message timeout ${conf.queryTimeoutMs}ms. ` +
         'Service at capacity, message could not succeed.';
-    await t.throwsAsync(resultsP, errMsg);
+    await t.throwsAsync(resultsP, { message: errMsg });
 });
 
 // Note that this test is run serially to prevent timeouts induced by other tests

@@ -35,7 +35,7 @@
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
         "start": "node --unhandled-rejections=strict ./src/index",
         "test": "PATHFINDER_REJECT_UNAUTHORIZED=true ava ./test/**/*.js",
-        "test:pathfinder": "ava ./src/lib/pathfinder/tests/",
+        "test:pathfinder": "ava ./src/lib/pathfinder/tests/index.js",
         "audit:resolve": "SHELL=sh resolve-audit --production",
         "audit:check": "SHELL=sh check-audit --production",
         "dep:check": "npx ncu -e 2",

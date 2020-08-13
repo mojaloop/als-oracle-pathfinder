@@ -18,10 +18,6 @@ orbs:
 defaults_working_directory: &defaults_working_directory
   working_directory: /home/circleci/project/git
 
-defaults_docker_node: &defaults_docker_node
-  docker:
-    - image: node:10.15.3-alpine
-
 defaults_docker_helm_kube: &defaults_docker_helm_kube
   docker:
     - image: hypnoglow/kubernetes-helm

@@ -260,6 +260,9 @@ jobs:
     executor: default-docker
     steps:
       - run:
+          name: Install general dependencies
+          command: *defaults_Dependencies
+      - run:
           <<: *defaults_license_scanner
       - checkout
       - restore_cache:

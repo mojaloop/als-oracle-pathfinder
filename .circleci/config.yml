@@ -279,6 +279,75 @@ jobs:
           path: /tmp/license-scanner/results
           prefix: licenses
 
+  image-scan:
+    executor: anchore/anchore_engine
+    working_directory: /home/circleci/project/git
+    environment:
+      POLICY_BUNDLE_PATH: /home/circleci/project/git/.circleci/.anchore/policy_bundle.json
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: Install AWS CLI dependencies
+          command: *defaults_awsCliDependencies
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: Load the pre-built docker image from workspace
+          command: docker load -i /tmp/docker-image.tar
+      - anchore/analyze_local_image:
+          dockerfile_path: ./Dockerfile
+          image_name: $DOCKER_ORG/$CIRCLE_PROJECT_REPONAME:local
+          # Anchore bug: if policy_failure is `true`, reports don't get written - we manually check for failures below
+          policy_failure: false
+          timeout: '500'
+      - run:
+          name: Evaluate Failures.
+          command: |
+            if [[ ! $(which jq) ]]; then
+              (set +o pipefail; apk add jq || apt-get install -y jq || yum install -y jq)
+            fi
+            if [[ $(ls anchore-reports/*content-os*.json 2> /dev/null) ]]; then
+              printf "\n%s\n" "The following OS packages are installed:"
+              jq '[.content | sort_by(.package) | .[] | {package: .package, version: .version}]' anchore-reports/*content-os*.json
+            fi
+            if [[ $(ls anchore-reports/*vuln*.json 2> /dev/null) ]]; then
+              printf "\n%s\n" "The following vulnerabilities were found:"
+              jq '[.vulnerabilities | group_by(.package) | .[] | {package: .[0].package, vuln: [.[].vuln]}]' anchore-reports/*vuln*.json
+            fi
+          #      - run:
+          #         name: Upload Anchore reports to s3
+          #         command: |
+          #           aws s3 cp anchore-reports ${AWS_S3_DIR_ANCHORE_REPORTS}/${CIRCLE_PROJECT_REPONAME}/ --recursive
+          #           aws s3 rm ${AWS_S3_DIR_ANCHORE_REPORTS}/latest/ --recursive --exclude "*" --include "${CIRCLE_PROJECT_REPONAME}*"
+          #           aws s3 cp anchore-reports ${AWS_S3_DIR_ANCHORE_REPORTS}/latest/ --recursive
+          # TODO: Enable this when we want to increase the strictness of our security policies
+          # failCount=$(cat anchore-reports/*policy*.json | grep 'fail' | wc -l)
+          # echo "FailCount is: ${failCount}"
+          # if [ $failCount -gt 0 ]; then
+          #   printf "Failed with a policy failure count of: ${failCount}"
+          #   exit 1
+          # fi
+      - store_artifacts:
+          path: anchore-reports
+
+  build-local:
+    executor: default-machine
+    steps:
+      - checkout
+      - run:
+          name: Build Docker local image
+          command: |
+            echo "Building Docker image: local"
+            docker build -t $DOCKER_ORG/$CIRCLE_PROJECT_REPONAME:local .
+      - run:
+          name: Save docker image to workspace
+          command: docker save -o /tmp/docker-image.tar $DOCKER_ORG/$CIRCLE_PROJECT_REPONAME:local
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - ./docker-image.tar
+
   build-snapshot:
     executor: default-machine
     steps:
@@ -446,8 +515,6 @@ workflows:
           requires:
             - setup
           filters:
-            tags:
-              only: /.*/
             branches:
               ignore:
                 - /feature*/
@@ -457,8 +524,6 @@ workflows:
           requires:
             - setup
           filters:
-            tags:
-              only: /.*/
             branches:
               ignore:
                 - /feature*/
@@ -468,8 +533,22 @@ workflows:
           requires:
             - setup
           filters:
-            tags:
-              only: /.*/
+            branches:
+              ignore:
+                - /feature*/
+                - /bugfix*/
+      - build-local:
+          context: org-global
+          filters:
+            branches:
+              ignore:
+                - /feature*/
+                - /bugfix*/
+      - image-scan:
+          context: org-global
+          requires:
+            - build-local
+          filters:
             branches:
               ignore:
                 - /feature*/
@@ -478,7 +557,6 @@ workflows:
           context: org-global
           requires:
             - setup
-            - audit-licenses
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*\-snapshot/

@@ -16,7 +16,7 @@ orbs:
 # YAML defaults templates, in alphabetical order
 ##
 defaults_working_directory: &defaults_working_directory
-  working_directory: /home/circleci/project
+  working_directory: /home/circleci/project/git
 
 defaults_docker_node: &defaults_docker_node
   docker:
@@ -181,12 +181,12 @@ defaults_slack_announcement: &defaults_slack_announcement
 ##
 executors:
   default-docker:
-    working_directory: /home/circleci/project/git
+    <<: *defaults_working_directory
     docker:
       - image: node:12.18.0-alpine
 
   default-machine:
-    working_directory: /home/circleci/project/git
+    <<: *defaults_working_directory
     machine:
       image: ubuntu-1604:201903-01
 

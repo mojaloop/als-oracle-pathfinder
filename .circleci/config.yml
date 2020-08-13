@@ -197,8 +197,7 @@ executors:
 ##
 jobs:
   setup:
-    <<: *defaults_working_directory
-    <<: *defaults_docker_node
+    executor: default-docker
     steps:
       - run:
           name: Install general dependencies
@@ -221,8 +220,7 @@ jobs:
             - node_modules
 
   test-unit:
-    <<: *defaults_working_directory
-    <<: *defaults_docker_node
+    executor: default-docker
     steps:
       - run:
           name: Install general dependencies
@@ -249,8 +247,7 @@ jobs:
           path: ./test/results
 
   vulnerability-check:
-    <<: *defaults_working_directory
-    <<: *defaults_docker_node
+    executor: default-docker
     steps:
       - run:
           name: Install general dependencies
@@ -270,8 +267,7 @@ jobs:
           prefix: audit
 
   audit-licenses:
-    <<: *defaults_working_directory
-    <<: *defaults_docker_node
+    executor: default-docker
     steps:
       - run:
           name: Install general dependencies
@@ -292,8 +288,7 @@ jobs:
           prefix: licenses
 
   build-snapshot:
-    machine: true
-    <<: *defaults_working_directory
+    executor: default-machine
     steps:
       - checkout
       - run:
@@ -316,8 +311,7 @@ jobs:
           <<: *defaults_slack_announcement
 
   build-hotfix:
-    machine: true
-    # <<: *default_env
+    executor: default-machine
     steps:
       - checkout
       - run:
@@ -336,8 +330,7 @@ jobs:
           <<: *defaults_slack_announcement
 
   build:
-    machine: true
-    # <<: *default_env
+    executor: default-machine
     steps:
       - checkout
       - run:
@@ -368,8 +361,7 @@ jobs:
           <<: *defaults_slack_announcement
 
   deploy-snapshot:
-    <<: *defaults_working_directory
-    <<: *defaults_docker_helm_kube
+    executor: default-machine
     steps:
       - run:
           <<: *defaults_environment

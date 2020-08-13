@@ -222,9 +222,6 @@ jobs:
   test-unit:
     executor: default-docker
     steps:
-      - run:
-          name: Install general dependencies
-          command: *defaults_Dependencies
       - checkout
       - run:
           <<: *defaults_environment
@@ -246,9 +243,6 @@ jobs:
   vulnerability-check:
     executor: default-docker
     steps:
-      - run:
-          name: Install general dependencies
-          command: *defaults_Dependencies
       - checkout
       - restore_cache:
           key: dependency-cache-v1-{{ checksum "package-lock.json" }}
@@ -266,9 +260,6 @@ jobs:
   audit-licenses:
     executor: default-docker
     steps:
-      - run:
-          name: Install general dependencies
-          command: *defaults_Dependencies
       - run:
           <<: *defaults_license_scanner
       - checkout

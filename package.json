@@ -34,7 +34,7 @@
         "lint": "eslint .",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
         "start": "node --unhandled-rejections=strict ./src/index",
-        "test": "ava ./test/**/*.js",
+        "test": "PATHFINDER_REJECT_UNAUTHORIZED=true ava ./test/**/*.js",
         "test:pathfinder": "ava ./src/lib/pathfinder/tests/",
         "audit:resolve": "SHELL=sh resolve-audit --production",
         "audit:check": "SHELL=sh check-audit --production",

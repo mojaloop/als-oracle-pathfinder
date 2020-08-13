@@ -1,5 +1,5 @@
-# CircleCI v2 Config
-version: 2
+# CircleCI v2.1 Config
+version: 2.1
 
 defaults_working_directory: &defaults_working_directory
   working_directory: /home/circleci/project
@@ -178,13 +178,13 @@ jobs:
       #          name: Install interledgerjs/five-bells-ledger-api-tests
       #          command: npm install github:interledgerjs/five-bells-ledger-api-tests
       - run:
-          name: Update NPM install
-          command: npm install
+          name: Update NPM install (using `npm ci`)
+          command: npm ci
       - run:
           name: Delete build dependencies
           command: apk del build-dependencies
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
 
@@ -200,7 +200,7 @@ jobs:
           <<: *defaults_environment
       - restore_cache:
           keys:
-            - dependency-cache-{{ checksum "package.json" }}
+            - dependency-cache-v1-{{ checksum "package-lock.json" }}
       - run:
           name: Install tape, tapes and tap-xunit
           command: npm install -g tape tapes tap-xunit
@@ -231,7 +231,7 @@ jobs:
           command: *defaults_awsCliDependencies
       - restore_cache:
           keys:
-            - dependency-cache-{{ checksum "package.json" }}
+            - dependency-cache-v1-{{ checksum "package-lock.json" }}
       - run:
           name: Execute code coverage check
           command: npm -s run test:coverage-check
@@ -259,7 +259,7 @@ jobs:
       - run:
           <<: *defaults_environment
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-v1-{{ checksum "package-lock.json" }}
       - run:
           name: Create dir for test results
           command: mkdir -p ./test/results
@@ -357,7 +357,7 @@ jobs:
           command: *defaults_Dependencies
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-v1-{{ checksum "package-lock.json" }}
       - run:
           name: Create dir for test results
           command: mkdir -p ./audit/results
@@ -380,7 +380,7 @@ jobs:
           <<: *defaults_license_scanner
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-v1-{{ checksum "package-lock.json" }}
       - run:
           name: Prune non-production packages before running license-scanner
           command: npm prune --production

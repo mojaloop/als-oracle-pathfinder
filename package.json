@@ -1,7 +1,7 @@
 {
     "name": "als-oracle-pathfinder",
     "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
-    "version": "10.2.0",
+    "version": "11.0.0",
     "author": "Matt Kingston <matt.kingston@modusbox.com>",
     "contributors": [],
     "repository": {
@@ -13,21 +13,21 @@
         "registry": "https://registry.npmjs.org"
     },
     "dependencies": {
-        "@hapi/boom": "^7.1.1",
-        "@hapi/hapi": "18.4.1",
+        "@hapi/boom": "^9.1.1",
+        "@hapi/hapi": "20.1.0",
         "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "9.5.1",
-        "@mojaloop/central-services-shared": "^11.5.4",
-        "dotenv": "^8.0.0",
-        "hapi-openapi": "^2.0.2",
-        "knex": "^0.19.5",
-        "mysql2": "^1.6.5"
+        "@mojaloop/central-services-logger": "10.6.0",
+        "@mojaloop/central-services-shared": "^11.5.5",
+        "dotenv": "^8.2.0",
+        "hapi-openapi": "^3.0.0",
+        "knex": "^0.21.17",
+        "mysql2": "^2.2.5"
     },
     "devDependencies": {
-        "ava": "^3.7.1",
-        "eslint": "5.6.1",
-        "npm-audit-resolver": "2.2.0",
-        "npm-check-updates": "6.0.1"
+        "ava": "^3.15.0",
+        "eslint": "7.19.0",
+        "npm-audit-resolver": "2.2.1",
+        "npm-check-updates": "11.1.1"
     },
     "scripts": {
         "build": "docker build -t als-oracle-pathfinder -f ./Dockerfile .",

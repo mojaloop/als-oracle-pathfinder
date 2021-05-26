@@ -11,7 +11,7 @@
     "author": "James Bush",
     "license": "ISC",
     "dependencies": {
-        "dns-packet": "^5.0.1"
+        "dns-packet": "^5.2.2"
     },
     "devDependencies": {
         "ava": "^3.11.1",

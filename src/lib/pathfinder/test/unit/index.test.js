@@ -7,9 +7,9 @@
 // TODO:
 // - test module crashes fatally upon failed reconnect
 const test = require('ava');
-const Config = require('../config');
+const Config = require('../../config');
 const _conf = new Config();
-const Pathfinder = require('../');
+const Pathfinder = require('../../');
 const mockSocket = require('./_mocksocket');
 const Chance = require('chance');
 const dnsPacket = require('dns-packet');

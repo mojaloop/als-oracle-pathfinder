@@ -16,8 +16,44 @@
       "expiresAt": 1592719585422
     },
     "1500|@mojaloop/central-services-shared>widdershins>yargs>yargs-parser": {
-      "decision": "postpone",
-      "madeAt": 1612854275017
+      "decision": "ignore",
+      "madeAt": 1629462642748,
+      "expiresAt": 1630067409696
+    },
+    "1673|@mojaloop/central-services-shared>data-urls>whatwg-url>lodash": {
+      "decision": "fix",
+      "madeAt": 1629462619961
+    },
+    "1673|@mojaloop/central-services-shared>openapi-backend>lodash": {
+      "decision": "fix",
+      "madeAt": 1629462619961
+    },
+    "1673|@mojaloop/central-services-shared>shins>sanitize-html>lodash": {
+      "decision": "fix",
+      "madeAt": 1629462619961
+    },
+    "1751|@mojaloop/central-services-shared>shins>chokidar>glob-parent": {
+      "decision": "fix",
+      "madeAt": 1629462629218
+    },
+    "1773|knex>rechoir>resolve>path-parse": {
+      "decision": "fix",
+      "madeAt": 1629462638863
+    },
+    "1675|@mojaloop/central-services-shared>shins>sanitize-html": {
+      "decision": "ignore",
+      "madeAt": 1629462646867,
+      "expiresAt": 1630067409696
+    },
+    "1676|@mojaloop/central-services-shared>shins>sanitize-html": {
+      "decision": "ignore",
+      "madeAt": 1629462646867,
+      "expiresAt": 1630067409696
+    },
+    "1745|00unidentified>dns-packet": {
+      "decision": "ignore",
+      "madeAt": 1629462653472,
+      "expiresAt": 1630067409696
     }
   },
   "rules": {},

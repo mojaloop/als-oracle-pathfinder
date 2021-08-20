@@ -3,7 +3,7 @@
 const path = require('path');
 const test = require('ava');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 const { createServer } = require(path.resolve(root, 'src/server'));
 const config = require(path.resolve(root, 'src/config'));
 

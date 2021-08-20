@@ -5,19 +5,26 @@
     "main": "tlsResolver.js",
     "scripts": {
         "test": "ava 'tests/**/*.js'",
-        "cover": "istanbul cover ava -- 'tests/**/*.js'",
-        "lint": "eslint --ignore-path ../.eslintignore ."
+        "test:coverage": "nyc ava -- 'test/unit/**/*.test.js' | nyc report ---reporter=text",
+        "test:coverage-check": "npm run test:coverage && nyc check-coverage",
+        "lint": "eslint --ignore-path ../.eslintignore .",
+        "audit:resolve": "SHELL=sh resolve-audit --production",
+        "audit:check": "SHELL=sh check-audit --production",
+        "dep:check": "npx ncu -e 2",
+        "dep:update": "npx ncu -u"
     },
     "author": "James Bush",
     "license": "ISC",
     "dependencies": {
-        "dns-packet": "^5.0.1"
+        "dns-packet": "^5.3.0"
     },
     "devDependencies": {
-        "ava": "^3.11.1",
-        "chance": "^1.0.16",
-        "eslint": "^4",
-        "eslint-plugin-ava": "^5.1.1",
-        "istanbul": "~0.4.3"
+        "ava": "^3.15.0",
+        "chance": "^1.1.7",
+        "eslint": "^7",
+        "eslint-plugin-ava": "^12.0.0",
+        "npm-audit-resolver": "2.3.1",
+        "npm-check-updates": "11.8.3",
+        "nyc": "^15.1.0"
     }
 }

@@ -3,7 +3,7 @@ const path = require('path');
 const test = require('ava');
 const sinon = require ('sinon');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 const { CentralLedgerDatabase } = require(path.resolve(root, 'src/db'));
 
 // Shut the logger up

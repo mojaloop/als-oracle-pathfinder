@@ -13,6 +13,8 @@ RUN npm install --production
 
 FROM node:12.16.2-alpine
 
+RUN apk add --no-cache mysql-client
+
 ARG BUILD_DATE
 ARG VCS_URL
 ARG VCS_REF

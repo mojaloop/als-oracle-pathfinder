@@ -18,6 +18,7 @@
         "@lib/pathfinder": "file:src/lib/pathfinder",
         "@mojaloop/central-services-logger": "10.6.1",
         "@mojaloop/central-services-shared": "^14.0.0",
+        "dns-packet": "^5.3.0",
         "dotenv": "^10.0.0",
         "hapi-openapi": "^3.0.0",
         "knex": "^0.95.10",

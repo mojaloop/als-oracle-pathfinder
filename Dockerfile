@@ -8,6 +8,7 @@ RUN apk add --no-cache -t build-dependencies git make gcc g++ python libtool aut
     && npm install -g node-gyp
 
 COPY ./package.json ./package-lock.json ./init-account-lookup.sql ./init-central-ledger.sql /opt/als-oracle-pathfinder/
+COPY ./src /opt/als-oracle-pathfinder/src
 
 RUN npm install --production
 
@@ -30,7 +31,7 @@ LABEL org.label-schema.url="https://mojaloop.io/"
 LABEL org.label-schema.version=$VERSION
 
 WORKDIR /opt/als-oracle-pathfinder
+
 COPY --from=builder /opt/als-oracle-pathfinder .
-COPY ./src /opt/als-oracle-pathfinder/src
 
 CMD ["node", "/opt/als-oracle-pathfinder/src/index.js"]

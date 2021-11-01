@@ -550,7 +550,6 @@ workflows:
           requires:
             - setup
             - test-unit
-            - test-coverage
             - vulnerability-check
             - audit-licenses
           filters:
@@ -584,7 +583,6 @@ workflows:
           requires:
             - pr-tools/pr-title-check
             - test-unit
-            - test-coverage
             - vulnerability-check
             - audit-licenses
             - license-scan

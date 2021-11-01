@@ -29,7 +29,8 @@
         "npm-audit-resolver": "2.3.1",
         "npm-check-updates": "11.8.3",
         "nyc": "^15.1.0",
-        "sinon": "^11.1.2"
+        "sinon": "^11.1.2",
+        "standard-version": "^9.3.2"
     },
     "scripts": {
         "build": "docker build -t als-oracle-pathfinder -f ./Dockerfile .",
@@ -43,7 +44,8 @@
         "audit:resolve": "SHELL=sh resolve-audit --production",
         "audit:check": "SHELL=sh check-audit --production",
         "dep:check": "npx ncu -e 2",
-        "dep:update": "npx ncu -u"
+        "dep:update": "npx ncu -u",
+        "release": "standard-version --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'"
     },
     "generator-swaggerize": {
         "version": "4.1.0"

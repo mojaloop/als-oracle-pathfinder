@@ -628,3 +628,20 @@ workflows:
               only:
                 - master
                 - /release\/v.*/
+      - publish:
+          context: org-global
+          requires:
+            - pr-tools/pr-title-check
+            - test-unit
+            - test-coverage
+            - vulnerability-check
+            - audit-licenses
+            - test-integration
+            - license-scan
+            - image-scan
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore:
+                - /.*/

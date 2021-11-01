@@ -25,7 +25,7 @@ const defaultConf = {
         tls: {
             host: process.env.PATHFINDER_TLS_HOST,
             port: process.env.PATHFINDER_TLS_PORT,
-            rejectUnauthorized: process.env.PATHFINDER_REJECT_UNAUTHORIZED.toLowerCase() !== 'false'
+            rejectUnauthorized: process.env.PATHFINDER_REJECT_UNAUTHORIZED && process.env.PATHFINDER_REJECT_UNAUTHORIZED.toLowerCase() !== 'false'
         },
         // The timeout for a query issued to the pathfinder module. This is *not* a timeout on a
         // query to the third-party pathfinder service.

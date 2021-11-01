@@ -213,7 +213,7 @@ jobs:
           name: Delete build dependencies
           command: apk del build-dependencies
       - save_cache:
-          key: dependency-cache-v2-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - node_modules
 
@@ -224,7 +224,7 @@ jobs:
       - run:
           <<: *defaults_environment
       - restore_cache:
-          key: dependency-cache-v2-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - node_modules
       - run:
@@ -244,7 +244,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-v2-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - node_modules
       - run:
@@ -268,7 +268,7 @@ jobs:
           <<: *defaults_license_scanner
       - checkout
       - restore_cache:
-          key: dependency-cache-v2-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - node_modules
       - run:

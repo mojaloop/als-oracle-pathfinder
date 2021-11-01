@@ -545,22 +545,12 @@ workflows:
               ignore:
                 - /feature*/
                 - /bugfix*/
-      - image-scan:
-          context: org-global
-          requires:
-            - build-local
-          filters:
-            branches:
-              ignore:
-                - /feature*/
-                - /bugfix*/
       - build:
           context: org-global
           requires:
             - setup
             - test-unit
             - test-coverage
-            - test-integration
             - vulnerability-check
             - audit-licenses
           filters:
@@ -579,6 +569,15 @@ workflows:
             branches:
               ignore:
                 - /.*/
+      - image-scan:
+          context: org-global
+          requires:
+            - build
+          filters:
+            branches:
+              ignore:
+                - /feature*/
+                - /bugfix*/
       # New commits to master release automatically
       - release:
           context: org-global

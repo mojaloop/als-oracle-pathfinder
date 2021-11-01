@@ -13,27 +13,12 @@ orbs:
   github-release: h-matsuo/github-release@0.1.3
 
 ##
-# Executors
-#
-# CircleCI Executors
-##
-executors:
-  default-docker:
-    working_directory: /home/circleci/project
-    docker:
-      - image: node:12.16.1-alpine
-
-  default-machine:
-    machine:
-      image: ubuntu-1604:201903-01
-
-##
 # defaults
 #
 # YAML defaults templates, in alphabetical order
 ##
 defaults_working_directory: &defaults_working_directory
-  working_directory: /home/circleci/project/git
+  working_directory: /home/circleci/project
 
 defaults_docker_helm_kube: &defaults_docker_helm_kube
   docker:

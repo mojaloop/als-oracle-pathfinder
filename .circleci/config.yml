@@ -633,7 +633,6 @@ workflows:
           requires:
             - pr-tools/pr-title-check
             - test-unit
-            - test-coverage
             - vulnerability-check
             - audit-licenses
             - test-integration

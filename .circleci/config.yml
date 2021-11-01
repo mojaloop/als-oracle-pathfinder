@@ -181,7 +181,7 @@ executors:
   default-docker:
     <<: *defaults_working_directory
     docker:
-      - image: node:12.18.0-alpine
+      - image: node:12.16.2-alpine
 
   default-machine:
     <<: *defaults_working_directory

@@ -10,7 +10,7 @@ RUN apk add --no-cache -t build-dependencies make gcc g++ python3 libtool libres
 COPY ./package.json ./package-lock.json ./init-account-lookup.sql ./init-central-ledger.sql /opt/app/
 COPY ./src /opt/app/src
 
-RUN npm ci --production
+RUN npm ci
 
 FROM node:16.15.0-alpine
 RUN apk add --no-cache mysql-client
@@ -23,15 +23,9 @@ RUN ln -sf /dev/stdout ./logs/combined.log
 
 # Create a non-root user: ml-user
 RUN adduser -D ml-user
-
-# Copy over files from builder
-COPY --chown=ml-user --from=builder /opt/app .
-
-# Set non-root user
 USER ml-user
 
-# Copy actual code
-COPY config /opt/app/config
-COPY src /opt/app/src
+COPY --chown=ml-user --from=builder /opt/app/ .
+RUN npm prune --production
 
 CMD ["node", "/opt/als-oracle-pathfinder/src/index.js"]

@@ -274,10 +274,13 @@ test('test post participants', async t => {
     method: 'post',
     headers,
     url: '/participants',
-    payload: { requestId: 'blah', partyList: [{
-      partyIdType: 'blah',
-      partyIdentifier: 'blah'
-    }]}
+    payload: {
+      requestId: 'blah',
+      partyList: [{
+        partyIdType: 'blah',
+        partyIdentifier: 'blah'
+      }]
+    }
   })
   t.is(response.statusCode, 501)
   t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/Not Implemented/))

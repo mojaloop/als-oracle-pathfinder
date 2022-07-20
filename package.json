@@ -1,7 +1,7 @@
 {
     "name": "als-oracle-pathfinder",
     "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
-    "version": "11.0.4",
+    "version": "12.0.0-snapshot.0",
     "author": "Matt Kingston <matt.kingston@modusbox.com>",
     "contributors": [],
     "repository": {
@@ -12,42 +12,55 @@
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
     },
+    "engines": {
+        "node": "=16.x"
+    },
+    "main": "./src/index.js",
     "dependencies": {
-        "@hapi/boom": "^9.1.3",
-        "@hapi/hapi": "20.1.5",
+        "@hapi/boom": "^10.0.0",
+        "@hapi/hapi": "20.2.2",
         "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "10.6.1",
-        "@mojaloop/central-services-shared": "^14.0.0",
-        "dotenv": "^10.0.0",
+        "@mojaloop/central-services-logger": "11.0.1",
+        "@mojaloop/central-services-shared": "^17.0.2",
+        "dotenv": "^16.0.1",
         "hapi-openapi": "^3.0.0",
-        "knex": "^0.95.10",
-        "mysql2": "^2.3.0"
+        "knex": "^2.2.0",
+        "mysql2": "^2.3.3"
     },
     "devDependencies": {
-        "ava": "^3.15.0",
-        "eslint": "7.32.0",
-        "npm-audit-resolver": "2.3.1",
-        "npm-check-updates": "11.8.3",
+        "ava": "^4.3.1",
+        "eslint": "8.20.0",
+        "npm-audit-resolver": "3.0.0-7",
+        "npm-check-updates": "15.3.4",
         "nyc": "^15.1.0",
-        "sinon": "^11.1.2",
-        "standard-version": "^9.3.2"
+        "sinon": "^14.0.0",
+        "standard": "^17.0.0",
+        "standard-version": "^9.5.0"
     },
     "scripts": {
         "build": "docker build -t als-oracle-pathfinder -f ./Dockerfile .",
-        "lint": "eslint .",
+        "lint": "npx standard",
+        "lint:fix": "npx standard --fix",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
         "start": "node --unhandled-rejections=strict ./src/index",
-        "test": "PATHFINDER_REJECT_UNAUTHORIZED=true ava ./test/unit/**/*.test.js",
+        "test": "PATHFINDER_REJECT_UNAUTHORIZED=true npm run test:unit",
+        "test:unit": "npx ava --no-worker-threads --serial ./test/unit/**/*.test.js",
+        "test:xunit": "npm run test:unit -- --tap | tap-xunit > ./test/results/xunit.xml",
+        "test:coverage-check": "nyc ava --no-worker-threads --serial ./test/unit/**/*.test.js",
         "test:pathfinder": "ava ./src/lib/pathfinder/test/unit/**/*.test.js",
-        "test:coverage": "nyc ava -- 'test/unit/**/*.test.js' | nyc report ---reporter=text",
-        "test:coverage-check": "npm run test:coverage && nyc check-coverage",
-        "audit:resolve": "SHELL=sh resolve-audit --production",
-        "audit:check": "SHELL=sh check-audit --production",
         "dep:check": "npx ncu -e 2",
         "dep:update": "npx ncu -u",
-        "release": "standard-version --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'"
+        "audit:resolve": "resolve-audit --production",
+        "audit:check": "check-audit --production",
+        "release": "npx standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
+        "snapshot": "npx standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
     },
     "generator-swaggerize": {
         "version": "4.1.0"
+    },
+    "standard-version": {
+        "scripts": {
+            "postchangelog": "replace '\\[mojaloop/#(\\d+)\\]\\(https://github.com/mojaloop/(.*)/issues/(\\d+)\\)' '[mojaloop/#$1](https://github.com/mojaloop/project/issues/$1)' CHANGELOG.md"
+        }
     }
 }

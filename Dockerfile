@@ -1,37 +1,31 @@
-FROM node:12.16.2-alpine AS builder
+FROM node:16.15.0-alpine as builder
+WORKDIR /opt/app
 
-WORKDIR /opt/als-oracle-pathfinder
-
-RUN apk add --no-cache -t build-dependencies git make gcc g++ python libtool autoconf automake bash mysql-client \
+RUN apk --no-cache add git
+RUN apk add --no-cache -t build-dependencies make gcc g++ python3 libtool libressl-dev openssl-dev autoconf automake \
     && cd $(npm root -g)/npm \
     && npm config set unsafe-perm true \
     && npm install -g node-gyp
 
-COPY ./package.json ./package-lock.json ./init-account-lookup.sql ./init-central-ledger.sql /opt/als-oracle-pathfinder/
-COPY ./src /opt/als-oracle-pathfinder/src
+COPY ./package.json ./package-lock.json ./init-account-lookup.sql ./init-central-ledger.sql /opt/app/
+COPY ./src /opt/app/src
 
-RUN npm ci --production
+RUN npm ci
 
-FROM node:12.16.2-alpine
-
+FROM node:16.15.0-alpine
 RUN apk add --no-cache mysql-client
+WORKDIR /opt/app
 
-ARG BUILD_DATE
-ARG VCS_URL
-ARG VCS_REF
-ARG VERSION
 
-# See http://label-schema.org/rc1/ for label schema info
-LABEL org.label-schema.schema-version="1.0"
-LABEL org.label-schema.name="als-oracle-pathfinder"
-LABEL org.label-schema.build-date=$BUILD_DATE
-LABEL org.label-schema.vcs-url=$VCS_URL
-LABEL org.label-schema.vcs-ref=$VCS_REF
-LABEL org.label-schema.url="https://mojaloop.io/"
-LABEL org.label-schema.version=$VERSION
+# Create empty log file & link stdout to the application log file
+RUN mkdir ./logs && touch ./logs/combined.log
+RUN ln -sf /dev/stdout ./logs/combined.log
 
-WORKDIR /opt/als-oracle-pathfinder
+# Create a non-root user: ml-user
+RUN adduser -D ml-user
+USER ml-user
 
-COPY --from=builder /opt/als-oracle-pathfinder .
+COPY --chown=ml-user --from=builder /opt/app/ .
+RUN npm prune --production
 
 CMD ["node", "/opt/als-oracle-pathfinder/src/index.js"]

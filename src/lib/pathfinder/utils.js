@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const nullF = () => {};
+const nullF = () => {}
 module.exports = {
-    nullLogger: {
-        debug: nullF, info: nullF, warn: nullF, error: nullF
-    }
-};
+  nullLogger: {
+    debug: nullF, info: nullF, warn: nullF, error: nullF
+  }
+}

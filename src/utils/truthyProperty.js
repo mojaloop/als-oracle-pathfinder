@@ -23,11 +23,11 @@
  ******/
 
 module.exports = (obj) => {
-    if (obj && typeof obj !== 'object') return true;
-    if (obj && Object.keys(obj).length) {
-        for (let key of Object.keys(obj)) {
-            if (key && obj[key]) return true;
-        }
+  if (obj && typeof obj !== 'object') return true
+  if (obj && Object.keys(obj).length) {
+    for (const key of Object.keys(obj)) {
+      if (key && obj[key]) return true
     }
-    return false;
-};
+  }
+  return false
+}

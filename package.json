@@ -24,7 +24,7 @@
         "@mojaloop/central-services-shared": "^17.0.2",
         "dotenv": "^16.0.1",
         "hapi-openapi": "^3.0.0",
-        "knex": "^2.2.0",
+        "knex": "^2.4.0",
         "mysql2": "^2.3.3"
     },
     "devDependencies": {

@@ -19,12 +19,12 @@
         "dns-packet": "^5.3.0"
     },
     "devDependencies": {
-        "ava": "^3.15.0",
+        "ava": "^5.2.0",
         "chance": "^1.1.7",
         "eslint": "^7",
         "eslint-plugin-ava": "^12.0.0",
         "npm-audit-resolver": "2.3.1",
-        "npm-check-updates": "11.8.3",
+        "npm-check-updates": "16.7.4",
         "nyc": "^15.1.0"
     }
 }

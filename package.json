@@ -13,33 +13,33 @@
         "registry": "https://registry.npmjs.org"
     },
     "engines": {
-        "node": "=16.x"
+        "node": "=18.x"
     },
     "main": "./src/index.js",
     "dependencies": {
-        "@hapi/boom": "^10.0.0",
-        "@hapi/hapi": "20.2.2",
+        "@hapi/boom": "^10.0.1",
+        "@hapi/hapi": "21.3.2",
         "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "11.0.1",
-        "@mojaloop/central-services-shared": "^17.0.2",
-        "dotenv": "^16.0.1",
+        "@mojaloop/central-services-logger": "11.2.2",
+        "@mojaloop/central-services-shared": "^18.2.0",
+        "dotenv": "^16.3.1",
         "hapi-openapi": "^3.0.0",
-        "knex": "^2.2.0",
-        "mysql2": "^2.3.3"
+        "knex": "^3.1.0",
+        "mysql2": "^3.6.5"
     },
     "devDependencies": {
-        "ava": "^4.3.1",
-        "eslint": "8.20.0",
-        "npm-audit-resolver": "3.0.0-7",
-        "npm-check-updates": "15.3.4",
+        "ava": "^6.0.1",
+        "eslint": "8.55.0",
+        "npm-audit-resolver": "3.0.0-RC.0",
+        "npm-check-updates": "16.14.11",
         "nyc": "^15.1.0",
-        "replace": "^1.2.1",
-        "sinon": "^14.0.0",
-        "standard": "^17.0.0",
+        "replace": "^1.2.2",
+        "sinon": "^17.0.1",
+        "standard": "^17.1.0",
         "standard-version": "^9.5.0"
     },
     "scripts": {
-        "build": "docker build -t als-oracle-pathfinder -f ./Dockerfile .",
+        "build": "docker build --build-arg NODE_VERSION=\"$(cat .nvmrc)-alpine\" -t mojaloop/als-oracle-pathfinder -f ./Dockerfile .",
         "lint": "npx standard",
         "lint:fix": "npx standard --fix",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
@@ -52,7 +52,8 @@
         "dep:check": "npx ncu -e 2",
         "dep:update": "npx ncu -u",
         "audit:resolve": "resolve-audit --production",
-        "audit:check": "check-audit --production",
+        "audit:fix": "npm audit fix",
+        "audit:check": "npx audit-ci --config ./audit-ci.jsonc",
         "release": "npx standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
         "snapshot": "npx standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
     },

@@ -15,6 +15,9 @@
     "engines": {
         "node": "=18.x"
     },
+    "ava": {
+        "timeout": "30s"
+    },
     "main": "./src/index.js",
     "dependencies": {
         "@hapi/boom": "^10.0.1",

@@ -4,10 +4,10 @@ const path = require('path')
 const test = require('ava')
 
 const root = path.resolve(__dirname, '../..')
-const { createServer } = require(path.resolve(root, 'src/server'))
+const { createServer, stopServer } = require(path.resolve(root, 'src/server'))
 const config = require(path.resolve(root, 'src/config'))
 
-// *** Some setup ***
+// // *** Some setup ***
 
 // Shut the logger up
 const Logger = require('@mojaloop/central-services-logger')
@@ -36,7 +36,14 @@ test.beforeEach(async t => {
   }
 })
 
+// close server after each test
+test.afterEach(async t => {
+  stopServer(t.context.server)
+})
+
+
 // *** Tests ***
+
 
 test('health-check succeeds if db is connected, pf queries are ok', async t => {
   t.context.server.app.db.isConnected = () => true
@@ -305,4 +312,32 @@ test('test delete participants by type and id', async t => {
   })
   t.is(response.statusCode, 501)
   t.assert(JSON.parse(response.payload).message.errorInformation.errorDescription.match(/Not Implemented/))
+})
+
+test('test get participants by type and id, missing parameters', async t => {
+  // Mock the necessary dependencies and setup test data
+  const request = {
+    method: 'GET',
+    url: '/participants?type=MSISDN'
+  }
+
+  // Make the request to the server
+  const response = await t.context.server.inject(request)
+
+  // Assert the response
+  t.deepEqual(response.statusCode, 404)
+})
+
+test('test unused endpoint', async t => {
+  // Mock the necessary dependencies and setup test data
+  const request = {
+    method: 'GET',
+    url: '/'
+  }
+
+  // Make the request to the server
+  const response = await t.context.server.inject(request)
+
+  // Assert the response
+  t.deepEqual(response.statusCode, 500)
 })

@@ -1,4 +1,3 @@
-
 const EventEmitter = require('events')
 
 class MockSocket extends EventEmitter {

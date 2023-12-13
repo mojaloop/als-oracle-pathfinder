@@ -1,4 +1,3 @@
-
 const path = require('path')
 const test = require('ava')
 const sinon = require('sinon')

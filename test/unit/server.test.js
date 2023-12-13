@@ -41,9 +41,7 @@ test.afterEach(async t => {
   stopServer(t.context.server)
 })
 
-
 // *** Tests ***
-
 
 test('health-check succeeds if db is connected, pf queries are ok', async t => {
   t.context.server.app.db.isConnected = () => true

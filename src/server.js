@@ -8,9 +8,9 @@ const Logger = require('@mojaloop/central-services-logger')
 module.exports.stopServer = async function (server) {
   try {
     await server.stop()
-    console.log('Server stopped')
+    Logger.info('Server stopped')
   } catch (error) {
-    console.error('Error stopping server:', error)
+    Logger.error('Error stopping server:', error)
   }
 }
 

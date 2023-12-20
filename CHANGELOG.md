@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.1.0](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.1.0-snapshot.2...v12.1.0) (2023-12-20)
+
 ## [12.0.0](https://github.com/mojaloop/als-oracle-pathfinder/compare/v11.0.4...v12.0.0) (2022-07-20)
 
 

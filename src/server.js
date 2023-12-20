@@ -5,6 +5,15 @@ const HapiOpenAPI = require('hapi-openapi')
 const Path = require('path')
 const Logger = require('@mojaloop/central-services-logger')
 
+module.exports.stopServer = async function (server) {
+  try {
+    await server.stop()
+    Logger.info('Server stopped')
+  } catch (error) {
+    Logger.error('Error stopping server:', error)
+  }
+}
+
 module.exports.createServer = async function ({ config, centralLedgerDb, pathfinder }) {
   try {
     const server = new Hapi.Server(config.server)

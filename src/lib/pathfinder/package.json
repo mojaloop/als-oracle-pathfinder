@@ -24,7 +24,7 @@
         "eslint": "^7",
         "eslint-plugin-ava": "^12.0.0",
         "npm-audit-resolver": "2.3.1",
-        "npm-check-updates": "11.8.3",
+        "npm-check-updates": "16.14.20",
         "nyc": "^15.1.0"
     }
 }

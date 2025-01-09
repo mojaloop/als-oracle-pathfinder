@@ -5,16 +5,8 @@
     "moderate": true,
     "allowlist": [   
          // dev dependencies
-        "GHSA-v88g-cgmw-v5xw",
-        "GHSA-phwq-j96m-2c2q",
         "GHSA-pfrx-2q88-qq97",
-        "GHSA-282f-qqgm-c34q",
-        "GHSA-6vfc-qv3f-vr6c",
-        "GHSA-7fh5-64p2-3v2j",
-        "GHSA-mjxr-4v3x-q3m4",
-        "GHSA-rjqq-98f6-6j3r",
         "GHSA-72xf-g2v4-qvf3",
-        "GHSA-p9pc-299p-vxgp",
         // cypres bug
         "GHSA-p8p7-x288-28g6"
      ]

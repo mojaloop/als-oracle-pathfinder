@@ -21,25 +21,41 @@
     "main": "./src/index.js",
     "dependencies": {
         "@hapi/boom": "^10.0.1",
-        "@hapi/hapi": "21.3.2",
+        "@hapi/hapi": "21.3.12",
         "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "11.2.2",
-        "@mojaloop/central-services-shared": "^18.2.0",
-        "dotenv": "^16.3.1",
+        "@mojaloop/central-services-logger": "11.5.2",
+        "@mojaloop/central-services-shared": "^18.15.1",
+        "dotenv": "^16.4.7",
         "hapi-openapi": "^3.0.0",
         "knex": "^3.1.0",
-        "mysql2": "^3.9.8"
+        "mysql2": "^3.12.0"
     },
     "devDependencies": {
-        "ava": "^6.0.1",
-        "eslint": "8.56.0",
+        "audit-ci": "^7.1.0",
+        "ava": "^6.2.0",
+        "eslint": "9.17.0",
         "npm-audit-resolver": "3.0.0-RC.0",
-        "npm-check-updates": "16.14.12",
-        "nyc": "^15.1.0",
+        "npm-check-updates": "17.1.13",
+        "nyc": "^17.1.0",
         "replace": "^1.2.2",
-        "sinon": "^17.0.1",
-        "standard": "^17.1.0",
+        "sinon": "^19.0.2",
+        "standard": "^17.1.2",
         "standard-version": "^9.5.0"
+    },
+    "overrides": {
+        "shins": {
+            "ajv": "6.12.3",
+            "ejs": "3.1.10",
+            "sanitize-html": "2.12.1",
+            "jsonpointer": "5.0.0",
+            "markdown-it": "12.3.2",
+            "postcss": "8.4.31"
+        },
+        "widdershins": {
+            "markdown-it": "12.3.2",
+            "swagger2openapi": "7.0.8"
+        },
+        "yargs-parser": "21.1.1"
     },
     "scripts": {
         "build": "docker build --build-arg NODE_VERSION=\"$(cat .nvmrc)-alpine\" -t mojaloop/als-oracle-pathfinder -f ./Dockerfile .",

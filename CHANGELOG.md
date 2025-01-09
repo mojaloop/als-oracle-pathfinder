@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.1.1](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.1.0...v12.1.1) (2025-01-09)
+
+
+### Chore
+
+* clean overrides package.json section ([d71b9d1](https://github.com/mojaloop/als-oracle-pathfinder/commit/d71b9d112c1619f5559cba2217fff27831e4be36))
+* fix vulnerabilities, update deps ([5f5ae37](https://github.com/mojaloop/als-oracle-pathfinder/commit/5f5ae3702fdbc7e193de2332be3f81491f4715a0))
+
 ## [12.1.0](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.1.0-snapshot.2...v12.1.0) (2023-12-20)
 
 ## [12.0.0](https://github.com/mojaloop/als-oracle-pathfinder/compare/v11.0.4...v12.0.0) (2022-07-20)

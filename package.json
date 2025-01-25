@@ -23,8 +23,8 @@
         "@hapi/boom": "^10.0.1",
         "@hapi/hapi": "21.3.12",
         "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "11.5.2",
-        "@mojaloop/central-services-shared": "^18.15.1",
+        "@mojaloop/central-services-logger": "11.5.3",
+        "@mojaloop/central-services-shared": "^18.16.0",
         "dotenv": "^16.4.7",
         "hapi-openapi": "^3.0.0",
         "knex": "^3.1.0",
@@ -33,9 +33,9 @@
     "devDependencies": {
         "audit-ci": "^7.1.0",
         "ava": "^6.2.0",
-        "eslint": "9.17.0",
+        "eslint": "9.19.0",
         "npm-audit-resolver": "3.0.0-RC.0",
-        "npm-check-updates": "17.1.13",
+        "npm-check-updates": "17.1.14",
         "nyc": "^17.1.0",
         "replace": "^1.2.2",
         "sinon": "^19.0.2",
@@ -43,19 +43,25 @@
         "standard-version": "^9.5.0"
     },
     "overrides": {
+        "standard": {
+            "json5": "2.2.2"
+        },
         "shins": {
             "ajv": "6.12.3",
             "ejs": "3.1.10",
             "sanitize-html": "2.12.1",
             "jsonpointer": "5.0.0",
             "markdown-it": "12.3.2",
-            "postcss": "8.4.31"
+            "postcss": "8.4.31",
+            "undici": "6.21.1"
         },
         "widdershins": {
             "markdown-it": "12.3.2",
             "swagger2openapi": "7.0.8"
         },
-        "yargs-parser": "21.1.1"
+        "yargs-parser": "21.1.1",
+        "tough-cookie": "4.1.3",
+        "got": "11.8.5"
     },
     "scripts": {
         "build": "docker build --build-arg NODE_VERSION=\"$(cat .nvmrc)-alpine\" -t mojaloop/als-oracle-pathfinder -f ./Dockerfile .",
@@ -68,6 +74,8 @@
         "test:xunit": "npm run test:unit -- --tap | tap-xunit > ./test/results/xunit.xml",
         "test:coverage-check": "nyc ava --no-worker-threads --serial ./test/unit/**/*.test.js",
         "test:pathfinder": "ava ./src/lib/pathfinder/test/unit/**/*.test.js",
+        "test:functional": "echo 'No functional tests defined'",
+        "test:integration": "echo 'No integration tests defined'",
         "dep:check": "npx ncu -e 2",
         "dep:update": "npx ncu -u",
         "audit:resolve": "resolve-audit --production",

@@ -16,15 +16,15 @@
     "author": "James Bush",
     "license": "ISC",
     "dependencies": {
-        "dns-packet": "^5.3.0"
+        "dns-packet": "^5.6.1"
     },
     "devDependencies": {
-        "ava": "^3.15.0",
-        "chance": "^1.1.7",
-        "eslint": "^7",
-        "eslint-plugin-ava": "^12.0.0",
+        "ava": "^6.2.0",
+        "chance": "^1.1.12",
+        "eslint": "^9",
+        "eslint-plugin-ava": "^15.0.1",
         "npm-audit-resolver": "2.3.1",
-        "npm-check-updates": "11.8.3",
-        "nyc": "^15.1.0"
+        "npm-check-updates": "17.1.14",
+        "nyc": "^17.1.0"
     }
 }

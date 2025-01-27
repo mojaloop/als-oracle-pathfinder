@@ -28,7 +28,7 @@ defaults_docker_Dependencies: &defaults_docker_Dependencies |
   apk --no-cache add librdkafka-dev
 
 defaults_awsCliDependencies: &defaults_awsCliDependencies |
-    apk --no-cache add aws-cli
+  apk --no-cache add aws-cli
 
 defaults_license_scanner: &defaults_license_scanner
   name: Install and set up license-scanner
@@ -447,7 +447,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
+            - dependency-cache-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           <<: *defaults_configure_git
       - run:
@@ -541,7 +541,7 @@ jobs:
           at: /tmp
       - run:
           name: Load the pre-built docker image from workspace
-          command: | 
+          command: |
             docker load -i /tmp/docker-image.tar
       - run:
           name: Login to Docker Hub

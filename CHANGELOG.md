@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.1.2](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.1.1...v12.1.2) (2025-01-27)
+
+
+### Chore
+
+* fix vulnerabilities ([d9c2793](https://github.com/mojaloop/als-oracle-pathfinder/commit/d9c27937bb9abe653bda55f4758360446f83f2d6))
+* keep circleci config ([60ab1d4](https://github.com/mojaloop/als-oracle-pathfinder/commit/60ab1d47e9a186a03252a2a0ed6ce94f054f4f93))
+* maintenance updates ([24fd524](https://github.com/mojaloop/als-oracle-pathfinder/commit/24fd5240b5d6bb88660386830730694122381862))
+
 ### [12.1.1](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.1.0...v12.1.1) (2025-01-09)
 
 

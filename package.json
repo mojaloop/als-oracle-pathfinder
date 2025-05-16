@@ -41,7 +41,8 @@
         "replace": "^1.2.2",
         "sinon": "^20.0.0",
         "standard": "^17.1.2",
-        "standard-version": "^9.5.0"
+        "standard-version": "^9.5.0",
+        "tap-xunit": "2.4.1"
     },
     "overrides": {
         "@mojaloop/central-services-shared": {
@@ -90,11 +91,11 @@
         "snapshot": "npx standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
     },
     "pre-commit": [
-      "lint",
-      "dep:check",
-      "audit:check",
-      "test",
-      "test:coverage-check"
+        "lint",
+        "dep:check",
+        "audit:check",
+        "test",
+        "test:coverage-check"
     ],
     "generator-swaggerize": {
         "version": "4.1.0"

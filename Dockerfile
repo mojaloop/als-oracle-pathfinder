@@ -23,9 +23,9 @@ COPY ./src /opt/app/src
 
 RUN npm ci
 
-FROM node:${NODE_VERSION}
-RUN apk add --no-cache mysql-client
-WORKDIR /opt/app
+# FROM node:${NODE_VERSION}
+# RUN apk add --no-cache mysql-client
+# WORKDIR /opt/app
 
 
 # Create empty log file & link stdout to the application log file

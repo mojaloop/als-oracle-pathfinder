@@ -33,7 +33,7 @@
     "devDependencies": {
         "audit-ci": "^7.1.0",
         "ava": "6.3.0",
-        "eslint": "9.26.0",
+        "eslint": "9.27.0",
         "npm-audit-resolver": "3.0.0-RC.0",
         "npm-check-updates": "18.0.1",
         "nyc": "^17.1.0",

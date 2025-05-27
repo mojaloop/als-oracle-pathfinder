@@ -13,36 +13,42 @@
         "registry": "https://registry.npmjs.org"
     },
     "engines": {
-        "node": "=18.x"
+        "node": "=22.x"
     },
     "ava": {
         "timeout": "30s"
     },
     "main": "./src/index.js",
     "dependencies": {
-        "@hapi/boom": "^10.0.1",
-        "@hapi/hapi": "21.3.12",
+        "@hapi/boom": "10.0.1",
+        "@hapi/hapi": "21.4.0",
         "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "11.5.5",
-        "@mojaloop/central-services-shared": "^18.18.2",
-        "dotenv": "^16.4.7",
-        "hapi-openapi": "^3.0.0",
-        "knex": "^3.1.0",
-        "mysql2": "^3.12.0"
+        "@mojaloop/central-services-logger": "11.9.0",
+        "@mojaloop/central-services-shared": "18.26.0",
+        "dotenv": "16.5.0",
+        "hapi-openapi": "3.0.0",
+        "knex": "3.1.0",
+        "mysql2": "3.14.1"
     },
     "devDependencies": {
         "audit-ci": "^7.1.0",
-        "ava": "^6.2.0",
-        "eslint": "9.21.0",
+        "ava": "6.3.0",
+        "eslint": "9.27.0",
         "npm-audit-resolver": "3.0.0-RC.0",
-        "npm-check-updates": "17.1.15",
+        "npm-check-updates": "18.0.1",
         "nyc": "^17.1.0",
+        "pre-commit": "1.2.2",
         "replace": "^1.2.2",
-        "sinon": "^19.0.2",
+        "sinon": "^20.0.0",
         "standard": "^17.1.2",
-        "standard-version": "^9.5.0"
+        "standard-version": "^9.5.0",
+        "tap-xunit": "2.4.1"
     },
     "overrides": {
+        "@mojaloop/central-services-shared": {
+            "@mojaloop/central-services-logger": "11.9.0"
+        },
+        "cross-spawn": "7.0.6",
         "standard": {
             "json5": "2.2.2"
         },
@@ -53,7 +59,7 @@
             "jsonpointer": "5.0.0",
             "markdown-it": "12.3.2",
             "postcss": "8.4.31",
-            "undici": "6.21.1"
+            "undici": "6.21.2"
         },
         "widdershins": {
             "markdown-it": "12.3.2",
@@ -84,6 +90,13 @@
         "release": "npx standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
         "snapshot": "npx standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
     },
+    "pre-commit": [
+        "lint",
+        "dep:check",
+        "audit:check",
+        "test",
+        "test:coverage-check"
+    ],
     "generator-swaggerize": {
         "version": "4.1.0"
     },

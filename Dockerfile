@@ -24,7 +24,7 @@ COPY ./src /opt/app/src
 RUN npm ci
 
 FROM node:${NODE_VERSION}
-RUN apk add --no-cache mysql-client
+# RUN apk add --no-cache mysql-client
 WORKDIR /opt/app
 
 

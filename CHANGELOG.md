@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.2.0](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.1.3...v12.2.0) (2025-05-29)
+
+
+### Features
+
+* bump up node to v22.15.0 ([d791265](https://github.com/mojaloop/als-oracle-pathfinder/commit/d7912650c7d1a7fcd3bf3b58105bbfb884b57afe))
+* bump up node to v22.15.0 ([8d846b0](https://github.com/mojaloop/als-oracle-pathfinder/commit/8d846b03cf012652aff229996224c4ecefb3049c))
+* bump up node to v22.15.0 ([0d21a20](https://github.com/mojaloop/als-oracle-pathfinder/commit/0d21a20934096f356d2353f59ef9c8a6a947bb3f))
+* bump up node to v22.15.0 ([fbad320](https://github.com/mojaloop/als-oracle-pathfinder/commit/fbad3202bf5d8b50b898ec6e71db98fd23d27af7))
+* bump up node to v22.15.0 ([b2e12a5](https://github.com/mojaloop/als-oracle-pathfinder/commit/b2e12a5d5a2302742df505f3344e6f06e6d63941))
+
+
+### Bug Fixes
+
+* new orb version to fix docker issue ([d165e4c](https://github.com/mojaloop/als-oracle-pathfinder/commit/d165e4c5ca3d4058c2ae580e052619aecb3cad64))
+* remove unused mysql-client from Dockerfile ([a4ed038](https://github.com/mojaloop/als-oracle-pathfinder/commit/a4ed0389116e563ef8c252ecd45b2a3db1cf55e8))
+* remove unused mysql-client from Dockerfile ([af5b37f](https://github.com/mojaloop/als-oracle-pathfinder/commit/af5b37f8db6a988a990acd7f432281e520e51f08))
+
 ### [12.1.3](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.1.2...v12.1.3) (2025-02-24)
 
 

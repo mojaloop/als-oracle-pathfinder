@@ -1,7 +1,7 @@
 {
     "name": "als-oracle-pathfinder",
     "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
-    "version": "12.1.3",
+    "version": "12.2.0",
     "author": "Matt Kingston <matt.kingston@modusbox.com>",
     "contributors": [],
     "repository": {

@@ -24,7 +24,7 @@
         "@hapi/hapi": "21.4.0",
         "@lib/pathfinder": "file:src/lib/pathfinder",
         "@mojaloop/central-services-logger": "11.9.0",
-        "@mojaloop/central-services-shared": "18.26.0",
+        "@mojaloop/central-services-shared": "18.26.2",
         "dotenv": "16.5.0",
         "hapi-openapi": "3.0.0",
         "knex": "3.1.0",

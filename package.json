@@ -24,8 +24,8 @@
         "@hapi/hapi": "21.4.0",
         "@lib/pathfinder": "file:src/lib/pathfinder",
         "@mojaloop/central-services-logger": "11.9.0",
-        "@mojaloop/central-services-shared": "18.30.0",
-        "dotenv": "17.2.0",
+        "@mojaloop/central-services-shared": "18.30.6",
+        "dotenv": "17.2.1",
         "hapi-openapi": "3.0.0",
         "knex": "3.1.0",
         "mysql2": "3.14.2"
@@ -35,7 +35,7 @@
         "ava": "6.4.1",
         "eslint": "9.31.0",
         "npm-audit-resolver": "3.0.0-RC.0",
-        "npm-check-updates": "18.0.1",
+        "npm-check-updates": "18.0.2",
         "nyc": "^17.1.0",
         "pre-commit": "1.2.2",
         "replace": "^1.2.2",
@@ -45,6 +45,10 @@
         "tap-xunit": "2.4.1"
     },
     "overrides": {
+        "form-data": "4.0.4",
+        "on-headers": "1.1.0",
+        "brace-expansion": "2.0.2",
+        "@eslint/plugin-kit": "0.3.3",
         "@mojaloop/central-services-shared": {
             "@mojaloop/central-services-logger": "11.9.0"
         },
@@ -58,8 +62,7 @@
             "sanitize-html": "2.12.1",
             "jsonpointer": "5.0.0",
             "markdown-it": "12.3.2",
-            "postcss": "8.4.31",
-            "undici": "6.21.2"
+            "postcss": "8.4.31"
         },
         "widdershins": {
             "markdown-it": "12.3.2",

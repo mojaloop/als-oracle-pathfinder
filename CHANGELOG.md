@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.3.1](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.3.0...v12.3.1) (2025-07-25)
+
+
+### Chore
+
+* fix vul and update deps ([1f99ff9](https://github.com/mojaloop/als-oracle-pathfinder/commit/1f99ff9ea60567a46583b2755984121ed890841f))
+* **sbom:** update sbom [skip ci] ([20aac75](https://github.com/mojaloop/als-oracle-pathfinder/commit/20aac75bcbfef0405ad18eea0ec483b74070d173))
+
 ## [12.3.0](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.2.0...v12.3.0) (2025-07-16)
 
 

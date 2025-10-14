@@ -21,21 +21,21 @@
     "main": "./src/index.js",
     "dependencies": {
         "@hapi/boom": "10.0.1",
-        "@hapi/hapi": "21.4.0",
+        "@hapi/hapi": "21.4.3",
         "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "11.9.0",
-        "@mojaloop/central-services-shared": "18.30.6",
-        "dotenv": "17.2.1",
+        "@mojaloop/central-services-logger": "11.10.1",
+        "@mojaloop/central-services-shared": "18.34.2",
+        "dotenv": "17.2.3",
         "hapi-openapi": "3.0.0",
         "knex": "3.1.0",
-        "mysql2": "3.14.2"
+        "mysql2": "3.15.2"
     },
     "devDependencies": {
         "audit-ci": "^7.1.0",
         "ava": "6.4.1",
-        "eslint": "9.31.0",
+        "eslint": "9.37.0",
         "npm-audit-resolver": "3.0.0-RC.0",
-        "npm-check-updates": "18.0.2",
+        "npm-check-updates": "19.1.0",
         "nyc": "^17.1.0",
         "pre-commit": "1.2.2",
         "replace": "^1.2.2",
@@ -50,7 +50,7 @@
         "brace-expansion": "2.0.2",
         "@eslint/plugin-kit": "0.3.3",
         "@mojaloop/central-services-shared": {
-            "@mojaloop/central-services-logger": "11.9.0"
+            "@mojaloop/central-services-logger": "11.10.1"
         },
         "cross-spawn": "7.0.6",
         "standard": {

@@ -13,7 +13,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "engines": {
-        "node": "=22.x"
+        "node": "22.x"
     },
     "ava": {
         "timeout": "30s"
@@ -48,7 +48,7 @@
         "form-data": "4.0.4",
         "on-headers": "1.1.0",
         "brace-expansion": "2.0.2",
-        "@eslint/plugin-kit": "0.3.3",
+        "@eslint/plugin-kit": "0.3.4",
         "@mojaloop/central-services-shared": {
             "@mojaloop/central-services-logger": "11.10.1"
         },

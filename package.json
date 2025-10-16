@@ -35,7 +35,7 @@
         "ava": "6.4.1",
         "eslint": "9.37.0",
         "npm-audit-resolver": "3.0.0-RC.0",
-        "npm-check-updates": "19.1.0",
+        "npm-check-updates": "19.1.1",
         "nyc": "^17.1.0",
         "pre-commit": "1.2.2",
         "replace": "^1.2.2",

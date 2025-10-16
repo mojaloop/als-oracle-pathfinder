@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.3.2](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.3.1...v12.3.2) (2025-10-16)
+
+
+### Chore
+
+* add grype comments ([efba0f5](https://github.com/mojaloop/als-oracle-pathfinder/commit/efba0f520644d4719012a61eddcfe0a40328b1be))
+* add grype ignore include aliases property ([5c20ebc](https://github.com/mojaloop/als-oracle-pathfinder/commit/5c20ebc6881980eb983a5652aa8124c5e03025b7))
+* comprehensive security fixes for PI28 ([dbca93c](https://github.com/mojaloop/als-oracle-pathfinder/commit/dbca93c29f2ad105f1a11cb7ee93c275abc7991c))
+* **sbom:** update sbom [skip ci] ([a9bfc14](https://github.com/mojaloop/als-oracle-pathfinder/commit/a9bfc14dd4f93fd7d8385dc48047d16a7a78cc53))
+* update Docker image and node ver ([5d5f968](https://github.com/mojaloop/als-oracle-pathfinder/commit/5d5f968f14a78c08a36cdd8b0922305271d05aed))
+* update orb ver, deps ([58caa3e](https://github.com/mojaloop/als-oracle-pathfinder/commit/58caa3eb00e94263f1e715bffd47c1e2a1075581))
+
 ### [12.3.1](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.3.0...v12.3.1) (2025-07-25)
 
 

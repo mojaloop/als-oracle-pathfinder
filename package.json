@@ -23,7 +23,7 @@
         "@hapi/boom": "10.0.1",
         "@hapi/hapi": "21.4.4",
         "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "11.10.2",
+        "@mojaloop/central-services-logger": "11.10.3",
         "@mojaloop/central-services-shared": "18.34.6",
         "dotenv": "17.2.3",
         "hapi-openapi": "3.0.0",
@@ -50,7 +50,7 @@
         "brace-expansion": "2.0.2",
         "@eslint/plugin-kit": "0.3.4",
         "@mojaloop/central-services-shared": {
-            "@mojaloop/central-services-logger": "11.10.2"
+            "@mojaloop/central-services-logger": "11.10.3"
         },
         "cross-spawn": "7.0.6",
         "standard": {

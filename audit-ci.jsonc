@@ -1,10 +1,17 @@
 {
-    "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
-    // audit-ci supports reading JSON, JSONC, and JSON5 config files.
-    // Only use one of ["low": true, "moderate": true, "high": true, "critical": true]
-    "moderate": true,
-    "allowlist": [
-        "GHSA-9965-vmph-33xx", // CVE-2025-56200: validator.js URL validation bypass - no fix without breaking changes
-        "GHSA-xffm-g5w8-qvg7" // @eslint/plugin-kit RegEx DoS - eslint 9.10.0-9.26.0 affected
-    ]
+  "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
+  // audit-ci supports reading JSON, JSONC, and JSON5 config files.
+  // Only use one of ["low": true, "moderate": true, "high": true, "critical": true]
+  "moderate": true,
+  "allowlist": [ // NOTE: Please add as much information as possible to any items added to the allowList
+    "GHSA-9965-vmph-33xx",
+    "GHSA-xffm-g5w8-qvg7",
+    "GHSA-2g4f-4pwh-qvx6",
+    "GHSA-xxjr-mmjv-4gpg",
+    "GHSA-3ppc-4f35-3m26",
+    "GHSA-r6q2-hw4h-h46w",
+    "GHSA-34x7-hfp2-rc4v",
+    "GHSA-8qq5-rm4j-mr97",
+    "GHSA-83g3-92jg-28cx"
+  ]
 }

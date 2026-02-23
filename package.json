@@ -1,114 +1,117 @@
 {
-    "name": "als-oracle-pathfinder",
-    "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
-    "version": "12.3.4",
-    "author": "Matt Kingston <matt.kingston@modusbox.com>",
-    "contributors": [],
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/mojaloop/als-oracle-pathfinder.git"
+  "name": "als-oracle-pathfinder",
+  "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
+  "version": "12.3.4",
+  "author": "Matt Kingston <matt.kingston@modusbox.com>",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mojaloop/als-oracle-pathfinder.git"
+  },
+  "bugs": "http://github.com/mojaloop/als-oracle-pathfinder/issues",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "ava": {
+    "timeout": "30s"
+  },
+  "main": "./src/index.js",
+  "dependencies": {
+    "@hapi/boom": "10.0.1",
+    "@hapi/hapi": "21.4.6",
+    "@lib/pathfinder": "file:src/lib/pathfinder",
+    "@mojaloop/central-services-logger": "11.10.4",
+    "@mojaloop/central-services-shared": "18.35.5",
+    "dotenv": "17.3.1",
+    "hapi-openapi": "3.0.0",
+    "knex": "3.1.0",
+    "mysql2": "3.17.4"
+  },
+  "devDependencies": {
+    "audit-ci": "^7.1.0",
+    "ava": "6.4.1",
+    "eslint": "10.0.1",
+    "npm-audit-resolver": "3.0.0-RC.0",
+    "npm-check-updates": "19.4.1",
+    "nyc": "^17.1.0",
+    "pre-commit": "1.2.2",
+    "replace": "^1.2.2",
+    "sinon": "^21.0.1",
+    "standard": "^17.1.2",
+    "standard-version": "^9.5.0",
+    "tap-xunit": "2.4.1"
+  },
+  "overrides": {
+    "form-data": "4.0.5",
+    "on-headers": "1.1.0",
+    "brace-expansion": "5.0.3",
+    "@eslint/plugin-kit": "0.3.4",
+    "@mojaloop/central-services-shared": {
+      "@mojaloop/central-services-logger": "11.10.4"
     },
-    "bugs": "http://github.com/mojaloop/als-oracle-pathfinder/issues",
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org"
+    "cross-spawn": "7.0.6",
+    "standard": {
+      "json5": "2.2.2"
     },
-    "engines": {
-        "node": "22.x"
+    "shins": {
+      "ajv": "6.12.3",
+      "ejs": "3.1.10",
+      "sanitize-html": "2.12.1",
+      "jsonpointer": "5.0.0",
+      "markdown-it": "12.3.2",
+      "postcss": "8.4.31"
     },
-    "ava": {
-        "timeout": "30s"
+    "widdershins": {
+      "markdown-it": "12.3.2",
+      "swagger2openapi": "7.0.8"
     },
-    "main": "./src/index.js",
-    "dependencies": {
-        "@hapi/boom": "10.0.1",
-        "@hapi/hapi": "21.4.4",
-        "@lib/pathfinder": "file:src/lib/pathfinder",
-        "@mojaloop/central-services-logger": "11.10.3",
-        "@mojaloop/central-services-shared": "18.34.6",
-        "dotenv": "17.2.3",
-        "hapi-openapi": "3.0.0",
-        "knex": "3.1.0",
-        "mysql2": "3.16.0"
-    },
-    "devDependencies": {
-        "audit-ci": "^7.1.0",
-        "ava": "6.4.1",
-        "eslint": "9.39.2",
-        "npm-audit-resolver": "3.0.0-RC.0",
-        "npm-check-updates": "19.3.1",
-        "nyc": "^17.1.0",
-        "pre-commit": "1.2.2",
-        "replace": "^1.2.2",
-        "sinon": "^21.0.1",
-        "standard": "^17.1.2",
-        "standard-version": "^9.5.0",
-        "tap-xunit": "2.4.1"
-    },
-    "overrides": {
-        "form-data": "4.0.4",
-        "on-headers": "1.1.0",
-        "brace-expansion": "2.0.2",
-        "@eslint/plugin-kit": "0.3.4",
-        "@mojaloop/central-services-shared": {
-            "@mojaloop/central-services-logger": "11.10.3"
-        },
-        "cross-spawn": "7.0.6",
-        "standard": {
-            "json5": "2.2.2"
-        },
-        "shins": {
-            "ajv": "6.12.3",
-            "ejs": "3.1.10",
-            "sanitize-html": "2.12.1",
-            "jsonpointer": "5.0.0",
-            "markdown-it": "12.3.2",
-            "postcss": "8.4.31"
-        },
-        "widdershins": {
-            "markdown-it": "12.3.2",
-            "swagger2openapi": "7.0.8"
-        },
-        "yargs-parser": "21.1.1",
-        "tough-cookie": "4.1.3",
-        "got": "11.8.5",
-        "validator": "13.15.22",
-        "js-yaml": "4.1.1",
-        "qs": "6.14.1"
-    },
+    "yargs-parser": "21.1.1",
+    "tough-cookie": "4.1.3",
+    "got": "11.8.5",
+    "validator": "13.15.22",
+    "js-yaml": "4.1.1",
+    "qs": "6.14.2",
+    "axios": "1.13.5",
+    "minimatch": "10.2.1",
+    "undici": "6.23.0"
+  },
+  "scripts": {
+    "build": "docker build --build-arg NODE_VERSION=\"$(cat .nvmrc)-alpine\" -t mojaloop/als-oracle-pathfinder -f ./Dockerfile .",
+    "lint": "npx standard",
+    "lint:fix": "npx standard --fix",
+    "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
+    "start": "node --unhandled-rejections=strict ./src/index",
+    "test": "PATHFINDER_REJECT_UNAUTHORIZED=true npm run test:unit",
+    "test:unit": "npx ava --no-worker-threads --serial ./test/unit/**/*.test.js",
+    "test:xunit": "npm run test:unit -- --tap | tap-xunit > ./test/results/xunit.xml",
+    "test:coverage-check": "nyc ava --no-worker-threads --serial ./test/unit/**/*.test.js",
+    "test:pathfinder": "ava ./src/lib/pathfinder/test/unit/**/*.test.js",
+    "test:functional": "echo 'No functional tests defined'",
+    "test:integration": "echo 'No integration tests defined'",
+    "dep:check": "npx ncu -e 2",
+    "dep:update": "npx ncu -u",
+    "audit:resolve": "resolve-audit --production",
+    "audit:fix": "npm audit fix",
+    "audit:check": "npx audit-ci --config ./audit-ci.jsonc",
+    "release": "npx standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
+    "snapshot": "npx standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
+  },
+  "pre-commit": [
+    "lint",
+    "dep:check",
+    "audit:check",
+    "test",
+    "test:coverage-check"
+  ],
+  "generator-swaggerize": {
+    "version": "4.1.0"
+  },
+  "standard-version": {
     "scripts": {
-        "build": "docker build --build-arg NODE_VERSION=\"$(cat .nvmrc)-alpine\" -t mojaloop/als-oracle-pathfinder -f ./Dockerfile .",
-        "lint": "npx standard",
-        "lint:fix": "npx standard --fix",
-        "regenerate": "yo swaggerize:test --framework hapi --apiPath './src/swagger.json'",
-        "start": "node --unhandled-rejections=strict ./src/index",
-        "test": "PATHFINDER_REJECT_UNAUTHORIZED=true npm run test:unit",
-        "test:unit": "npx ava --no-worker-threads --serial ./test/unit/**/*.test.js",
-        "test:xunit": "npm run test:unit -- --tap | tap-xunit > ./test/results/xunit.xml",
-        "test:coverage-check": "nyc ava --no-worker-threads --serial ./test/unit/**/*.test.js",
-        "test:pathfinder": "ava ./src/lib/pathfinder/test/unit/**/*.test.js",
-        "test:functional": "echo 'No functional tests defined'",
-        "test:integration": "echo 'No integration tests defined'",
-        "dep:check": "npx ncu -e 2",
-        "dep:update": "npx ncu -u",
-        "audit:resolve": "resolve-audit --production",
-        "audit:fix": "npm audit fix",
-        "audit:check": "npx audit-ci --config ./audit-ci.jsonc",
-        "release": "npx standard-version --no-verify --releaseCommitMessageFormat 'chore(release): {{currentTag}} [skip ci]'",
-        "snapshot": "npx standard-version --no-verify --skip.changelog --prerelease snapshot --releaseCommitMessageFormat 'chore(snapshot): {{currentTag}}'"
-    },
-    "pre-commit": [
-        "lint",
-        "dep:check",
-        "audit:check",
-        "test",
-        "test:coverage-check"
-    ],
-    "generator-swaggerize": {
-        "version": "4.1.0"
-    },
-    "standard-version": {
-        "scripts": {
-            "postchangelog": "replace '\\[mojaloop/#(\\d+)\\]\\(https://github.com/mojaloop/(.*)/issues/(\\d+)\\)' '[mojaloop/#$1](https://github.com/mojaloop/project/issues/$1)' CHANGELOG.md"
-        }
+      "postchangelog": "replace '\\[mojaloop/#(\\d+)\\]\\(https://github.com/mojaloop/(.*)/issues/(\\d+)\\)' '[mojaloop/#$1](https://github.com/mojaloop/project/issues/$1)' CHANGELOG.md"
     }
+  }
 }

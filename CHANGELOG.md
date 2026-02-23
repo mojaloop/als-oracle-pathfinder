@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.3.5](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.3.4...v12.3.5) (2026-02-23)
+
+
+### Bug Fixes
+
+* remove minimatch override, add fast-xml-parser 5.3.6, clean up audit-ci/grype ([9e8e3f4](https://github.com/mojaloop/als-oracle-pathfinder/commit/9e8e3f4f63d22d37e6c08db83cc0e869310e2a8b))
+
+
+### Chore
+
+* **sbom:** update sbom [skip ci] ([d9e3398](https://github.com/mojaloop/als-oracle-pathfinder/commit/d9e3398a9e4542fc72de83e7af390fcbf5e15d7d))
+* update dependencies and apply security patches ([c2b7fac](https://github.com/mojaloop/als-oracle-pathfinder/commit/c2b7fac66335949d0b87db14a69af30ece4fbcde))
+* update Dockerfile NODE_VERSION to 22.22.0-alpine3.23 ([0777727](https://github.com/mojaloop/als-oracle-pathfinder/commit/0777727c845836002ce14f67041b8137e5608095))
+
 ### [12.3.4](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.3.3...v12.3.4) (2026-01-15)
 
 

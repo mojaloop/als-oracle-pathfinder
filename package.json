@@ -1,5 +1,6 @@
 {
   "name": "als-oracle-pathfinder",
+  "private": true,
   "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
   "version": "12.3.5",
   "author": "Matt Kingston <matt.kingston@modusbox.com>",
@@ -21,25 +22,25 @@
   "main": "./src/index.js",
   "dependencies": {
     "@hapi/boom": "10.0.1",
-    "@hapi/hapi": "21.4.6",
+    "@hapi/hapi": "21.4.7",
     "@lib/pathfinder": "file:src/lib/pathfinder",
     "@mojaloop/central-services-logger": "11.10.4",
-    "@mojaloop/central-services-shared": "18.35.5",
+    "@mojaloop/central-services-shared": "18.35.6",
     "dotenv": "17.3.1",
     "hapi-openapi": "3.0.0",
-    "knex": "3.1.0",
-    "mysql2": "3.17.4"
+    "knex": "3.2.4",
+    "mysql2": "3.20.0"
   },
   "devDependencies": {
     "audit-ci": "^7.1.0",
-    "ava": "6.4.1",
-    "eslint": "10.0.1",
+    "ava": "7.0.0",
+    "eslint": "10.1.0",
     "npm-audit-resolver": "3.0.0-RC.0",
-    "npm-check-updates": "19.4.1",
-    "nyc": "^17.1.0",
+    "npm-check-updates": "19.6.5",
+    "nyc": "^18.0.0",
     "pre-commit": "1.2.2",
     "replace": "^1.2.2",
-    "sinon": "^21.0.1",
+    "sinon": "^21.0.3",
     "standard": "^17.1.2",
     "standard-version": "^9.5.0",
     "tap-xunit": "2.4.1"
@@ -47,7 +48,7 @@
   "overrides": {
     "form-data": "4.0.5",
     "on-headers": "1.1.0",
-    "@eslint/plugin-kit": "0.3.4",
+    "@eslint/plugin-kit": "0.6.1",
     "@mojaloop/central-services-shared": {
       "@mojaloop/central-services-logger": "11.10.4"
     },
@@ -56,7 +57,6 @@
       "json5": "2.2.2"
     },
     "shins": {
-      "ajv": "6.12.3",
       "ejs": "3.1.10",
       "sanitize-html": "2.12.1",
       "jsonpointer": "5.0.0",
@@ -70,12 +70,15 @@
     "yargs-parser": "21.1.1",
     "tough-cookie": "4.1.3",
     "got": "11.8.5",
-    "validator": "13.15.22",
+    "validator": "13.15.26",
     "js-yaml": "4.1.1",
-    "qs": "6.14.2",
-    "axios": "1.13.5",
-    "fast-xml-parser": "5.3.6",
-    "undici": "6.23.0"
+    "qs": "6.15.0",
+    "axios": "1.13.6",
+    "fast-xml-parser": "5.5.7",
+    "undici": "6.24.1",
+    "immutable": "5.1.5",
+    "ajv": "6.14.0",
+    "minimatch": "10.2.4"
   },
   "scripts": {
     "build": "docker build --build-arg NODE_VERSION=\"$(cat .nvmrc)-alpine\" -t mojaloop/als-oracle-pathfinder -f ./Dockerfile .",

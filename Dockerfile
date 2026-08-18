@@ -1,5 +1,5 @@
 # Arguments
-ARG NODE_VERSION=22.22.0-alpine3.23
+ARG NODE_VERSION=24.18.0-alpine3.24
 
 # NOTE: Ensure you set NODE_VERSION Build Argument as follows...
 #
@@ -39,4 +39,4 @@ USER ml-user
 COPY --chown=ml-user --from=builder /opt/app/ .
 RUN npm prune --production
 
-CMD ["node", "/opt/als-oracle-pathfinder/src/index.js"]
+CMD ["node", "/opt/app/src/index.js"]

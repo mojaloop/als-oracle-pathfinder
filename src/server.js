@@ -1,9 +1,10 @@
 'use strict'
 
 const Hapi = require('@hapi/hapi')
-const HapiOpenAPI = require('hapi-openapi')
 const Path = require('path')
 const Logger = require('@mojaloop/central-services-logger')
+const OpenapiBackend = require('@mojaloop/central-services-shared').Util.OpenapiBackend
+const Handlers = require('./handlers')
 
 module.exports.stopServer = async function (server) {
   try {
@@ -14,17 +15,34 @@ module.exports.stopServer = async function (server) {
   }
 }
 
+/**
+ * Dispatches a hapi request through OpenapiBackend (validation + operationId
+ * routing). FSPIOPErrors thrown by handlers or validationFail are shaped into
+ * the FSPIOP error body with their HTTP status instead of a generic 500.
+ */
+const handleRequest = async (api, req, h) => {
+  try {
+    return await api.handleRequest(
+      {
+        method: req.method,
+        path: req.path,
+        body: req.payload,
+        query: req.query,
+        headers: req.headers
+      }, req, h)
+  } catch (err) {
+    if (err.httpStatusCode && typeof err.toApiErrorObject === 'function') {
+      return h.response(err.toApiErrorObject()).code(err.httpStatusCode)
+    }
+    throw err
+  }
+}
+
 module.exports.createServer = async function ({ config, centralLedgerDb, pathfinder }) {
   try {
     const server = new Hapi.Server(config.server)
+    const api = await OpenapiBackend.initialise(Path.resolve(__dirname, './swagger.json'), Handlers)
     await server.register([
-      {
-        plugin: HapiOpenAPI,
-        options: {
-          api: Path.resolve(__dirname, './swagger.json'),
-          handlers: Path.resolve(__dirname, './handlers')
-        }
-      },
       {
         plugin: require('./utils/logger-plugin')
       }
@@ -86,6 +104,11 @@ module.exports.createServer = async function ({ config, centralLedgerDb, pathfin
         }
         return h.response().code(200) // 200 expected by k8s, should be 204
       }
+    })
+    server.route({
+      method: ['GET', 'POST', 'PUT', 'DELETE'],
+      path: '/{path*}',
+      handler: (req, h) => handleRequest(api, req, h)
     })
 
     await server.start()

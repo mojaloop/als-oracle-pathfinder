@@ -21,7 +21,9 @@ RUN apk add --no-cache -t build-dependencies make gcc g++ python3 libtool openss
 COPY ./package.json ./package-lock.json ./init-account-lookup.sql ./init-central-ledger.sql /opt/app/
 COPY ./src /opt/app/src
 
-RUN npm ci
+# Lifecycle scripts are skipped for supply-chain safety (docker:S6505). This service
+# has no production dependency that requires a native post-install build.
+RUN npm ci --ignore-scripts
 
 FROM node:${NODE_VERSION}
 # RUN apk add --no-cache mysql-client

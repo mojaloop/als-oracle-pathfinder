@@ -38,10 +38,34 @@ const handleRequest = async (api, req, h) => {
   }
 }
 
+/**
+ * Fail fast when the API definition declares an operation with no handler.
+ *
+ * `OpenapiBackend.initialise` runs openapi-backend non-strict, so an operation it has no
+ * handler for is dispatched to `notFound`. An operationId added to the definition but never
+ * wired into the handlers map would therefore answer 404 at runtime rather than failing at
+ * startup - the filesystem-based routing this replaced could not drift that way.
+ *
+ * @param {object} api Initialised OpenAPIBackend instance
+ * @throws {Error} If the definition declares an operation with no registered handler
+ */
+const assertHandlersRegistered = (api) => {
+  const unhandled = api.getOperations()
+    .filter(({ operationId }) => typeof api.handlers[operationId] !== 'function')
+    .map(({ method, path, operationId }) => `${method.toUpperCase()} ${path} (operationId: ${operationId})`)
+
+  if (unhandled.length > 0) {
+    throw new Error(`OpenAPI definition declares operations with no registered handler: ${unhandled.join(', ')}`)
+  }
+}
+
+module.exports.assertHandlersRegistered = assertHandlersRegistered
+
 module.exports.createServer = async function ({ config, centralLedgerDb, pathfinder }) {
   try {
     const server = new Hapi.Server(config.server)
     const api = await OpenapiBackend.initialise(Path.resolve(__dirname, './swagger.json'), Handlers)
+    assertHandlersRegistered(api)
     await server.register([
       {
         plugin: require('./utils/logger-plugin')

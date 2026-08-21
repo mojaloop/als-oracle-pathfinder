@@ -28,7 +28,7 @@
     "@mojaloop/central-services-shared": "18.38.2",
     "dotenv": "17.4.2",
     "knex": "3.3.0",
-    "mysql2": "3.23.3"
+    "mysql2": "3.23.4"
   },
   "devDependencies": {
     "audit-ci": "^7.1.0",

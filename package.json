@@ -3,6 +3,7 @@
   "private": true,
   "description": "An Account Lookup Service Oracle using GSMA PathFinder for resolution of MSISDNs",
   "version": "12.3.5",
+  "license": "Apache-2.0",
   "author": "Matt Kingston <matt.kingston@modusbox.com>",
   "contributors": [],
   "repository": {

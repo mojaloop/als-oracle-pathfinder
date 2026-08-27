@@ -25,18 +25,19 @@
     "@hapi/boom": "10.0.1",
     "@hapi/hapi": "21.4.10",
     "@lib/pathfinder": "file:src/lib/pathfinder",
+    "@mojaloop/central-services-error-handling": "13.2.0",
     "@mojaloop/central-services-logger": "11.10.6",
     "@mojaloop/central-services-shared": "18.38.2",
     "dotenv": "17.4.2",
     "knex": "3.3.0",
-    "mysql2": "3.23.4"
+    "mysql2": "3.24.2"
   },
   "devDependencies": {
     "audit-ci": "^7.1.0",
     "ava": "8.0.1",
-    "eslint": "10.9.0",
+    "eslint": "10.9.1",
     "npm-audit-resolver": "3.0.0-RC.0",
-    "npm-check-updates": "23.0.2",
+    "npm-check-updates": "23.1.0",
     "nyc": "^18.0.0",
     "pre-commit": "2.0.0",
     "replace": "^1.2.2",

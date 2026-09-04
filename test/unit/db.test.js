@@ -1,5 +1,5 @@
 const path = require('path')
-const test = require('ava')
+const test = require('ava').default
 const sinon = require('sinon')
 
 const root = path.resolve(__dirname, '../..')

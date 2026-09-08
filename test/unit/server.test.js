@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path')
-const test = require('ava')
+const test = require('ava').default
 
 const root = path.resolve(__dirname, '../..')
 const { createServer, stopServer } = require(path.resolve(root, 'src/server'))
@@ -322,8 +322,11 @@ test('test get participants by type and id, missing parameters', async t => {
   // Make the request to the server
   const response = await t.context.server.inject(request)
 
-  // Assert the response
-  t.deepEqual(response.statusCode, 404)
+  // Assert the response. /participants exists in the spec with POST only, so
+  // OpenapiBackend answers 405 Method Not Allowed (the fleet-wide behavior via
+  // the shared methodNotAllowed handler); hapi-openapi's per-route table
+  // returned 404 for the same request.
+  t.deepEqual(response.statusCode, 405)
 })
 
 test('test unused endpoint', async t => {

@@ -15,7 +15,7 @@ FROM node:${NODE_VERSION} as builder
 WORKDIR /opt/app
 
 RUN apk --no-cache add git
-RUN apk add --no-cache -t build-dependencies \
+RUN apk add --no-cache --virtual .build-deps \
     autoconf automake bash g++ gcc libtool make openssl-dev python3
 
 COPY ./package.json ./package-lock.json ./init-account-lookup.sql ./init-central-ledger.sql /opt/app/

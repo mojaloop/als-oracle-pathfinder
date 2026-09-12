@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.4.0](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.3.5...v12.4.0) (2026-09-12)
+
+
+### Features
+
+* migrate to OpenAPI 3.0.3 and openapi-backend [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([91de722](https://github.com/mojaloop/als-oracle-pathfinder/commit/91de72226d50ed9f5517530edec326957356b1d5))
+
+
+### Bug Fixes
+
+* assert every declared operation has a registered handler [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([6d8d0e5](https://github.com/mojaloop/als-oracle-pathfinder/commit/6d8d0e514be91ef29636041c9ee0591b7a2e9f99))
+* clear SonarCloud Dockerfile findings on the build-deps layer [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([53825ca](https://github.com/mojaloop/als-oracle-pathfinder/commit/53825ca5ca0d8556a1c036e3247d2388dfd9a337))
+* declare the licences the license gate reports as undetermined [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([6fe8074](https://github.com/mojaloop/als-oracle-pathfinder/commit/6fe80743a79f482bda64b786603b613f106a42c4))
+* name the apk virtual package so S7018 sees a sorted list [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([13a46d5](https://github.com/mojaloop/als-oracle-pathfinder/commit/13a46d577d545486b0dbe06c516714cafc535135))
+* scope the minimatch override so the release job can run ([a4c4a58](https://github.com/mojaloop/als-oracle-pathfinder/commit/a4c4a58a6298d6473917c4d3e851277747866c2d))
+* upgrade CI orb to 2.1.3 and skip lifecycle scripts in docker build [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([7cfce0b](https://github.com/mojaloop/als-oracle-pathfinder/commit/7cfce0b39ae8fc3cf22e9a9dcf6b2e382a7235ff))
+
+
+### Documentation
+
+* record the ERROR_HANDLING_AJV_JOI_PARITY setting [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([8a87ef2](https://github.com/mojaloop/als-oracle-pathfinder/commit/8a87ef2d31592928ad0a48054828b2b0d0cd73c0))
+
+
+### Chore
+
+* add private:true to prevent npm publish ([#4384](https://github.com/mojaloop/als-oracle-pathfinder/issues/4384)) ([437844d](https://github.com/mojaloop/als-oracle-pathfinder/commit/437844ddb2b050f872cd6d77fb8a5bd39622d03d))
+* adopt central-services-error-handling 13.2.0 [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([4d9e1f3](https://github.com/mojaloop/als-oracle-pathfinder/commit/4d9e1f3eeb9667a5f2a83cfdff32313da2f5a7c5)), closes [mojaloop/central-services-error-handling#216](https://github.com/mojaloop/central-services-error-handling/issues/216)
+* clear grype/audit findings and refresh dependencies [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([aaead0f](https://github.com/mojaloop/als-oracle-pathfinder/commit/aaead0f600f556e817ea7cea556acd01c9604afd))
+* declare OpenAPI 3.1.0 and update mysql2 [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([51f46bc](https://github.com/mojaloop/als-oracle-pathfinder/commit/51f46bc5c6ec052102cb1a80e1433ce42ab36ab9))
+* declare OpenAPI 3.2.0 in the API document [mojaloop/[#4479](https://github.com/mojaloop/als-oracle-pathfinder/issues/4479)] ([f5d9f10](https://github.com/mojaloop/als-oracle-pathfinder/commit/f5d9f10f9fbcc69d660220b414189104c19c6e72))
+* update dependencies and fix vulnerabilities ([656b0fe](https://github.com/mojaloop/als-oracle-pathfinder/commit/656b0fee6758b55c1027fcdff26def35096fbf60))
+* update knex 3.2.3 to 3.2.4 ([232754d](https://github.com/mojaloop/als-oracle-pathfinder/commit/232754db476c6cb254aa9aaa1fbe295b631f3cea))
+* update node 22.22.1, orb 1.1.19, fix npm audit overrides ([0723cda](https://github.com/mojaloop/als-oracle-pathfinder/commit/0723cdad2e8d0e780824bbbda09ed948f52c9480))
+
 ### [12.3.5](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.3.4...v12.3.5) (2026-02-23)
 
 

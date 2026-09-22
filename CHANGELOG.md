@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [12.4.1](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.4.0...v12.4.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* keep the @eslint/plugin-kit and yargs-parser overrides at their current versions ([80755f9](https://github.com/mojaloop/als-oracle-pathfinder/commit/80755f9fb3bcaf7a1d4145b816d480c846ef55d6))
+
+
+### Chore
+
+* update dependencies and apply security patches ([12d408e](https://github.com/mojaloop/als-oracle-pathfinder/commit/12d408eb3486401764ee0b52c7ed999d4a01b6fa))
+
 ## [12.4.0](https://github.com/mojaloop/als-oracle-pathfinder/compare/v12.3.5...v12.4.0) (2026-09-12)
 
 
